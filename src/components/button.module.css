@@ -1,0 +1,14 @@
+.btn {
+    padding: 0.75rem;
+    cursor: pointer;
+    border: none;
+    border-radius: var(--radius-md);
+}
+.primary {
+    composes: btn;
+    background-color: var(--color-primary) !important;
+}
+.primary {
+    composes: btn;
+    background-color: var(--color-secodary);
+}
