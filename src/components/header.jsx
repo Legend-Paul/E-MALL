@@ -70,12 +70,12 @@ export default function Header() {
                             </li>
                             <li>
                                 <NavLink
-                                    to="/sign-in"
+                                    to="/account"
                                     className={({ isActive }) =>
                                         isActive ? styles["active"] : ""
                                     }
                                 >
-                                    Sign in
+                                    Account
                                 </NavLink>
                             </li>
                         </ul>

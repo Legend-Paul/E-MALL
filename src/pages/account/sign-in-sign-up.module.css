@@ -1,0 +1,40 @@
+.form-container {
+    width: 100%;
+    form {
+        display: grid;
+        max-width: 30rem;
+        gap: 1.5rem;
+        width: 100%;
+        background-color: var(--color-surface);
+        padding: 2rem;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-lg);
+        button {
+            background-color: var(--color-secondary) !important;
+            opacity: 0.8;
+            &:hover {
+                opacity: 1;
+                /* background-color: var(--color-primary-dark) !important; */
+            }
+        }
+    }
+}
+
+.sign-in {
+    position: relative;
+    overflow: hidden;
+}
+
+.description,
+.form-container {
+    transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+
+.move-description {
+    transform: translateX(300%);
+}
+
+.move-form {
+    transform: translateX(-300%);
+}

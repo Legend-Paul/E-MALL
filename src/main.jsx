@@ -14,8 +14,9 @@ import Header, { Action as headerAction } from "./components/header";
 import Home from "./pages/home";
 import About from "./pages/about";
 import Contact from "./pages/contact";
-import SignIn, { Action as signInAction } from "./pages/sign-in";
-import SignUp from "./pages/sign-up";
+import SignIn, { Action as signInAction } from "./pages/account/sign-in";
+import SignUp from "./pages/account/sign-up";
+import Account from "./pages/account/account";
 
 const routes = createBrowserRouter(
     createRoutesFromElements(
@@ -28,16 +29,24 @@ const routes = createBrowserRouter(
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route
-                    path="/sign-in"
-                    element={<SignIn />}
-                    action={signInAction}
-                />
-                <Route
-                    path="/sign-up"
-                    element={<SignUp />}
-                    // action={signInAction}
-                />
+                <Route path="/account" element={<Account />}>
+                    <Route
+                        index
+                        // path="sign-in"
+                        element={<SignIn />}
+                        action={signInAction}
+                    />
+                    <Route
+                        path="sign-up"
+                        element={<SignUp />}
+                        // action={signInAction}
+                    />
+                    <Route
+                        path="sign-in"
+                        element={<SignIn />}
+                        action={signInAction}
+                    />
+                </Route>
             </Route>
         </>
     )
