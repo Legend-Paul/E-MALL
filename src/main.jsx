@@ -9,13 +9,13 @@ import {
 
 import "./assets/variables.css";
 
-import ErrorPage from "./ErrorPage";
+import ErrorPage from "./errorPage";
 import Header, { Action as headerAction } from "./components/header";
 import Home from "./pages/home";
 import About from "./pages/about";
 import Contact from "./pages/contact";
 import SignIn, { Action as signInAction } from "./pages/account/sign-in";
-import SignUp from "./pages/account/sign-up";
+import SignUp, { Action as signUpAction } from "./pages/account/sign-up";
 import Account from "./pages/account/account";
 
 const routes = createBrowserRouter(
@@ -26,20 +26,15 @@ const routes = createBrowserRouter(
                 errorElement={<ErrorPage />}
                 action={headerAction}
             >
-                <Route path="/" element={<Home />} />
+                <Route index path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/account" element={<Account />}>
-                    <Route
-                        index
-                        // path="sign-in"
-                        element={<SignIn />}
-                        action={signInAction}
-                    />
+                    <Route index element={<SignIn />} action={signInAction} />
                     <Route
                         path="sign-up"
                         element={<SignUp />}
-                        // action={signInAction}
+                        action={signUpAction}
                     />
                     <Route
                         path="sign-in"

@@ -1,0 +1,8 @@
+.error-page {
+    place-content: center;
+    place-items: center;
+    display: grid;
+    height: 100vh;
+    gap: 1rem;
+    margin-top: -6rem;
+}

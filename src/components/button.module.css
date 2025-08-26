@@ -9,6 +9,10 @@
     &:hover {
         box-shadow: var(--shadow-md);
     }
+    &:active {
+        border: 2px solid var(--color-success);
+        transform: scale(0.98);
+    }
 }
 .primary {
     composes: btn;
