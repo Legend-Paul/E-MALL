@@ -1,18 +1,21 @@
 .account-page {
-    /* place-items: center;
-    place-content: center; */
-    margin-top: 8rem;
-    height: 85vh;
+    margin-top: 7rem;
+    min-height: 85vh;
+    place-items: center;
+    place-content: center;
+
     .account {
         margin-top: -2rem;
         display: grid;
         gap: 3rem;
         place-items: center;
         place-content: center;
-        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        justify-content: center;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         width: 100%;
         height: 100%;
-        /* width: 30rem; */
+
         .description {
             width: 100%;
             height: 100%;
@@ -42,5 +45,47 @@
                 cursor: pointer;
             }
         }
+    }
+}
+
+@media screen and (width < 900px) {
+    .account-page {
+        margin-top: 9rem !important;
+    }
+    .description {
+        clip-path: polygon(
+            0% 0%,
+            75% 0%,
+            100% 50%,
+            75% 100%,
+            0% 100%
+        ) !important;
+    }
+
+    h2,
+    p {
+        margin-left: 0 !important;
+    }
+}
+
+@media screen and (width < 710px) {
+    .sign-up-margin {
+        padding-bottom: 1rem;
+    }
+    .account-page {
+        place-items: start !important;
+        place-content: start !important;
+    }
+    .description {
+        clip-path: polygon(
+            100% 0,
+            100% 64%,
+            59% 100%,
+            0 66%,
+            0 0,
+            41% 0
+        ) !important;
+
+        height: 10rem !important;
     }
 }

@@ -1,5 +1,6 @@
 .form-container {
     width: 100%;
+    place-items: center;
     form {
         display: grid;
         max-width: 30rem;
