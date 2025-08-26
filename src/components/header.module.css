@@ -1,5 +1,6 @@
 header {
     position: fixed;
+    z-index: var(--z-header);
     top: 0;
     width: 100%;
     background-color: var(--color-primary-dark);

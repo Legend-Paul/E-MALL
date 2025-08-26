@@ -4,9 +4,8 @@
     --color-primary-light: #e6efff;
     --color-primary-dark: #003bb5;
 
-    --color-secondary: #ffcc00; /* Highlight/accent (for deals/offers) */
+    --color-secondary: #ff6f00; /* Highlight/accent (for deals/offers) */
     --color-accent: #00d1b2; /* CTA color (buy now, add to cart, etc.) */
-    --color-tech-orange: #ff6f00;
 
     --color-background: #f9f9f9;
     --color-surface: #ffffff;

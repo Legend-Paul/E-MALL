@@ -2,24 +2,29 @@
     display: grid;
     gap: 1rem;
     width: 100%;
+}
 
-    input {
-        height: 2.5rem;
-        padding: 0.5rem;
-        border-radius: var(--radius-sm);
-        border: none;
-        outline: 2px solid var(--color-text-muted);
-        max-width: 30rem;
-        &:focus {
-            outline-color: var(--color-info);
-        }
-        &:focus:valid,
-        &:focus:user-valid {
-            outline-color: var(--color-success);
-        }
-        &:invalid,
-        &:user-invalid {
-            outline-color: var(--color-error);
-        }
-    }
+.label input {
+    height: 2.5rem;
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+    border: none;
+    outline: 2px solid var(--color-text-muted);
+    max-width: 30rem;
+    transition: outline-color 0.2s;
+}
+
+/* Focused: info color */
+.label input:focus {
+    outline-color: var(--color-info);
+}
+
+/* Not focused, has value, and valid: success color */
+.label input:not(:focus):not(:placeholder-shown):valid {
+    outline-color: var(--color-success);
+}
+
+/* Not focused, has value, and invalid: error color */
+.label input:not(:focus):not(:placeholder-shown):invalid {
+    outline-color: var(--color-error);
 }
