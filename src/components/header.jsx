@@ -26,7 +26,7 @@ export default function Header() {
                             placehoder={"search item here"}
                         />
                         <Button
-                            label={"Search"}
+                            label={<i class="bi bi-search"></i>}
                             type={"submit"}
                             color={"none"}
                         />

@@ -14,6 +14,11 @@ header {
     a {
         text-decoration: none;
         color: var(--color-text-inverse);
+        transition: var(--transition-fast);
+
+        &:hover {
+            color: var(--color-secondary);
+        }
     }
     a.active {
         color: var(--color-secondary);
@@ -30,12 +35,28 @@ header {
         form {
             display: flex;
             flex-grow: 1;
-            gap: 1px;
-            align-items: end;
 
+            align-items: end;
+            input {
+                border-right: none;
+                border-bottom-right-radius: 0;
+                border-top-right-radius: 0;
+            }
             button {
+                width: 2.5rem;
                 cursor: pointer;
-                height: 2.5rem;
+                height: 2.7rem;
+                margin-bottom: -0.1rem;
+                border-radius: var(--radius-sm);
+                background-color: var(--color-surface);
+                border: 2px solid var(--color-text-muted);
+                border-left: none;
+                border-bottom-left-radius: 0;
+                border-top-left-radius: 0;
+                i {
+                    font-size: 1.5rem;
+                    color: var(--color-primary-dark);
+                }
             }
         }
     }
