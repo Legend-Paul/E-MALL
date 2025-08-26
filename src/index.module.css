@@ -1,7 +1,14 @@
+body {
+    background-color: var(--color-background);
+}
 .page {
     margin: auto;
     margin-top: 4rem;
     max-width: 1300px;
     padding: 1.5rem;
+
     /* height: 100vh; */
+}
+h2 {
+    font-size: 3rem;
 }

@@ -3,6 +3,7 @@
     cursor: pointer;
     border: none;
     border-radius: var(--radius-md);
+    max-width: 30rem;
 }
 .primary {
     composes: btn;

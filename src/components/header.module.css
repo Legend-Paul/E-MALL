@@ -31,9 +31,11 @@ header {
             display: flex;
             flex-grow: 1;
             gap: 1px;
+            align-items: end;
 
             button {
                 cursor: pointer;
+                height: 2.5rem;
             }
         }
     }
