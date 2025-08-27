@@ -12,31 +12,116 @@ export async function Action({ request }) {
 
 export default function Header() {
     return (
-        <div className={styles["header-container"]}>
-            <header>
-                <div className={styles["logo-search"]}>
-                    <h1>
-                        <NavLink to="/">E-MALL</NavLink>
-                    </h1>
+        <div className={styles["content-container"]}>
+            <div className={styles["header-styles"]}>
+                <header>
+                    <div className={styles["logo-search"]}>
+                        <h1>
+                            <NavLink to="/">E-MALL</NavLink>
+                        </h1>
 
-                    <Form method="post" action="/">
-                        <Input
-                            type={"search"}
-                            name={"search"}
-                            placehoder={"search item here"}
-                        />
-                        <Button
-                            label={<i className="bi bi-search"></i>}
-                            type={"submit"}
-                            color={"none"}
-                        />
-                    </Form>
-                </div>
+                        <Form method="post" action="/">
+                            <Input
+                                type={"search"}
+                                name={"search"}
+                                placehoder={"search item here"}
+                            />
+                            <Button
+                                label={<i className="bi bi-search"></i>}
+                                type={"submit"}
+                                color={"none"}
+                            />
+                        </Form>
+                    </div>
 
-                <div className={styles["nav-container"]}>
+                    <div className={styles["nav-container"]}>
+                        <nav>
+                            <ul>
+                                <li className={styles["burger-md"]}>
+                                    <NavLink
+                                        to="/"
+                                        className={({ isActive }) =>
+                                            isActive ? styles["active"] : ""
+                                        }
+                                    >
+                                        {/* <i className="bi bi-house-door-fill"></i> */}
+                                        Home
+                                    </NavLink>
+                                </li>
+                                <li className={styles["burger-md"]}>
+                                    <NavLink
+                                        to="/about"
+                                        className={({ isActive }) =>
+                                            isActive ? styles["active"] : ""
+                                        }
+                                    >
+                                        About
+                                    </NavLink>
+                                </li>
+                                <li className={styles["burger-md"]}>
+                                    <NavLink
+                                        to="/contact"
+                                        className={({ isActive }) =>
+                                            isActive ? styles["active"] : ""
+                                        }
+                                    >
+                                        {/* <i class="bi bi-chat-right-dots-fill"></i> */}
+                                        Contact
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to="/account"
+                                        className={({ isActive }) =>
+                                            isActive ? styles["active"] : ""
+                                        }
+                                    >
+                                        Account
+                                    </NavLink>
+                                </li>
+                                <li className={styles["burger-sm"]}>
+                                    <NavLink
+                                        to="/orders"
+                                        className={({ isActive }) =>
+                                            isActive ? styles["active"] : ""
+                                        }
+                                    >
+                                        Orders
+                                    </NavLink>
+                                </li>
+                                <li className={styles["burger-md"]}>
+                                    <NavLink
+                                        to="/liked"
+                                        className={({ isActive }) =>
+                                            isActive ? styles["active"] : ""
+                                        }
+                                    >
+                                        Liked
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to="/cart"
+                                        className={({ isActive }) =>
+                                            isActive ? styles["active"] : ""
+                                        }
+                                    >
+                                        Cart
+                                    </NavLink>
+                                </li>
+                                <li className={styles["burger-cont"]}>
+                                    <div className={styles["burger"]}></div>
+                                    <div className={styles["burger"]}></div>
+                                    <div className={styles["burger"]}></div>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </header>
+                <div className={styles["menu"]}>
                     <nav>
                         <ul>
-                            <li>
+                            <li className={styles["burger-md"]}>
                                 <NavLink
                                     to="/"
                                     className={({ isActive }) =>
@@ -47,7 +132,7 @@ export default function Header() {
                                     Home
                                 </NavLink>
                             </li>
-                            <li>
+                            <li className={styles["burger-md"]}>
                                 <NavLink
                                     to="/about"
                                     className={({ isActive }) =>
@@ -57,7 +142,7 @@ export default function Header() {
                                     About
                                 </NavLink>
                             </li>
-                            <li>
+                            <li className={styles["burger-md"]}>
                                 <NavLink
                                     to="/contact"
                                     className={({ isActive }) =>
@@ -68,31 +153,7 @@ export default function Header() {
                                     Contact
                                 </NavLink>
                             </li>
-                            <li>
-                                <NavLink
-                                    to="/account"
-                                    className={({ isActive }) =>
-                                        isActive ? styles["active"] : ""
-                                    }
-                                >
-                                    Account
-                                </NavLink>
-                            </li>
-                        </ul>
-                    </nav>
-                    <nav className={styles.nav}>
-                        <ul>
-                            <li>
-                                <NavLink
-                                    to="/cart"
-                                    className={({ isActive }) =>
-                                        isActive ? styles["active"] : ""
-                                    }
-                                >
-                                    Cart
-                                </NavLink>
-                            </li>
-                            <li>
+                            <li className={styles["burger-sm"]}>
                                 <NavLink
                                     to="/orders"
                                     className={({ isActive }) =>
@@ -102,7 +163,7 @@ export default function Header() {
                                     Orders
                                 </NavLink>
                             </li>
-                            <li>
+                            <li className={styles["burger-md"]}>
                                 <NavLink
                                     to="/liked"
                                     className={({ isActive }) =>
@@ -115,7 +176,7 @@ export default function Header() {
                         </ul>
                     </nav>
                 </div>
-            </header>
+            </div>
 
             <Outlet />
         </div>

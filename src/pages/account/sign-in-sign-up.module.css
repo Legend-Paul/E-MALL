@@ -3,7 +3,7 @@
     place-items: center;
     form {
         display: grid;
-        max-width: 30rem;
+        max-width: 35rem;
         gap: 1.5rem;
         width: 100%;
         background-color: var(--color-surface);

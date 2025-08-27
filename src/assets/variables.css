@@ -60,9 +60,3 @@
     --container-width: 1200px;
     --container-padding: 1rem;
 }
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
