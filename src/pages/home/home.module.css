@@ -1,6 +1,7 @@
 .user-options-cont {
     max-width: 50%;
-    h3 {
+    overflow: hidden;
+    .achordion {
         background-color: var(--color-surface);
         display: inline-block;
         padding: 0.5rem 1rem;
@@ -9,10 +10,16 @@
         border-radius: var(--radius-md);
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
+        z-index: var(--z-header);
+        h3 {
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
     }
 }
 
 .user-options {
+    margin-top: 0.5rem;
     display: grid;
     gap: 2rem;
     background-color: var(--color-surface);
@@ -20,6 +27,7 @@
     box-shadow: var(--shadow-lg);
     border-radius: var(--radius-lg);
     border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .filter-options {
@@ -59,4 +67,15 @@
     display: grid;
     gap: 1rem;
     padding-left: 1rem;
+}
+.hide-options {
+    transition: var(--transition-slow);
+    opacity: 0;
+
+    transform: scaleX(0);
+}
+.open-options {
+    opacity: 1;
+    transform: scaleX(1);
+    transition: var(--transition-slow);
 }
