@@ -35,8 +35,6 @@ export default function Account() {
                             : "If you have an account"}{" "}
                         <button onClick={changeRoute}> {route}</button>
                     </p>
-
-                    {/* clip-path: polygon(100% 0, 100% 100%, 49% 61%, 0 99%, 0 0); */}
                 </div>
                 <Outlet />
             </div>

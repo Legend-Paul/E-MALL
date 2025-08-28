@@ -1,4 +1,4 @@
-import { Form, Link, NavLink } from "react-router-dom";
+import { Form, Link, NavLink, redirect, useActionData } from "react-router-dom";
 import styles from "./sign-in-sign-up.module.css";
 
 import Button from "../../components/button";
@@ -6,12 +6,21 @@ import Input from "../../components/input";
 
 export async function Action({ request }) {
     const formDat = await request.formData();
-    console.log(formDat.get("email"));
-    console.log(formDat.get("password"));
-    return null;
+    const email = formDat.get("email");
+    const password = formDat.get("password");
+    const details = JSON.parse(localStorage.getItem(email));
+    const error = {};
+    !details || details?.password !== password
+        ? (error.name = "Inalid email or password")
+        : delete error.className;
+
+    if (Object.keys(error).length > 0) return error;
+    return redirect("/");
 }
 
 export default function SignIn() {
+    const error = useActionData();
+
     return (
         <div
             className={`${styles["form-container"]}
@@ -30,6 +39,7 @@ export default function SignIn() {
                     placehoder={"********"}
                     labelName={"Password"}
                 />
+                <p className={styles["error-msg"]}>{error?.name}</p>
 
                 <Button type={"submit"} label={"Sign In"} />
             </Form>

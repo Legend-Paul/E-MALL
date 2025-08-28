@@ -1,5 +1,5 @@
 import styles from "./sign-in-sign-up.module.css";
-import { Form, NavLink, useActionData } from "react-router-dom";
+import { Form, NavLink, useActionData, useNavigate } from "react-router-dom";
 import Button from "../../components/button";
 import Input from "../../components/input";
 
@@ -29,13 +29,14 @@ export async function Action({ request }) {
 }
 
 export default function SignUp() {
+    const navigate = useNavigate();
     const data = useActionData();
-    console.table(data);
     function saveTolocalStorage(key, details) {
         localStorage.setItem(key, JSON.stringify(details));
+        navigate("/");
     }
     data?.email ? saveTolocalStorage(data?.email, data?.details) : null;
-    console.log(localStorage);
+
     return (
         <div
             className={`${styles["form-container"]} 
