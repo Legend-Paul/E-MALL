@@ -16,7 +16,7 @@ export default function Account() {
     console.log(route !== "sign-up" ? "sign-up-margin" : "");
 
     return (
-        <div
+        <section
             className={`${indexStyles["page"]} ${styles["account-page"]} ${
                 styles[`${route !== "sign-up" ? "sign-up-margin" : ""}`]
             }`}
@@ -41,6 +41,6 @@ export default function Account() {
                 </div>
                 <Outlet />
             </div>
-        </div>
+        </section>
     );
 }

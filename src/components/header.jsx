@@ -3,6 +3,7 @@ import { NavLink, Outlet, Form } from "react-router-dom";
 import styles from "./header.module.css";
 import Input from "./input";
 import Button from "./button";
+import { useState } from "react";
 
 export async function Action({ request }) {
     const data = await request.formData();
@@ -11,6 +12,12 @@ export async function Action({ request }) {
 }
 
 export default function Header() {
+    const [toggleMenu, setToggleMenu] = useState(false);
+
+    function handleBurderClick() {
+        setToggleMenu((state) => !state);
+    }
+
     return (
         <div className={styles["content-container"]}>
             <div className={styles["header-styles"]}>
@@ -65,20 +72,10 @@ export default function Header() {
                                             isActive ? styles["active"] : ""
                                         }
                                     >
-                                        {/* <i class="bi bi-chat-right-dots-fill"></i> */}
                                         Contact
                                     </NavLink>
                                 </li>
-                                <li>
-                                    <NavLink
-                                        to="/account"
-                                        className={({ isActive }) =>
-                                            isActive ? styles["active"] : ""
-                                        }
-                                    >
-                                        Account
-                                    </NavLink>
-                                </li>
+
                                 <li className={styles["burger-sm"]}>
                                     <NavLink
                                         to="/orders"
@@ -99,6 +96,16 @@ export default function Header() {
                                         Liked
                                     </NavLink>
                                 </li>
+                                <li className={styles["burger-xsm"]}>
+                                    <NavLink
+                                        to="/account"
+                                        className={({ isActive }) =>
+                                            isActive ? styles["active"] : ""
+                                        }
+                                    >
+                                        Account
+                                    </NavLink>
+                                </li>
                                 <li>
                                     <NavLink
                                         to="/cart"
@@ -109,7 +116,14 @@ export default function Header() {
                                         Cart
                                     </NavLink>
                                 </li>
-                                <li className={styles["burger-cont"]}>
+                                <li
+                                    className={`${styles["burger-cont"]} ${
+                                        toggleMenu
+                                            ? styles["burger-show"]
+                                            : styles["burger-hide"]
+                                    }`}
+                                    onClick={handleBurderClick}
+                                >
                                     <div className={styles["burger"]}></div>
                                     <div className={styles["burger"]}></div>
                                     <div className={styles["burger"]}></div>
@@ -118,7 +132,11 @@ export default function Header() {
                         </nav>
                     </div>
                 </header>
-                <div className={styles["menu"]}>
+                <div
+                    className={`${styles["menu"]} ${
+                        toggleMenu ? styles["show"] : styles["hide"]
+                    }`}
+                >
                     <nav>
                         <ul>
                             <li className={styles["burger-md"]}>
@@ -161,6 +179,16 @@ export default function Header() {
                                     }
                                 >
                                     Orders
+                                </NavLink>
+                            </li>
+                            <li className={styles["burger-xsm"]}>
+                                <NavLink
+                                    to="/account"
+                                    className={({ isActive }) =>
+                                        isActive ? styles["active"] : ""
+                                    }
+                                >
+                                    Account
                                 </NavLink>
                             </li>
                             <li className={styles["burger-md"]}>

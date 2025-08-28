@@ -11,7 +11,7 @@ import "./assets/variables.css";
 
 import ErrorPage from "./errorPage";
 import Header, { Action as headerAction } from "./components/header";
-import Home from "./pages/home";
+import Home from "./pages/home/home";
 import About from "./pages/about";
 import Contact from "./pages/contact";
 import SignIn, { Action as signInAction } from "./pages/account/sign-in";
