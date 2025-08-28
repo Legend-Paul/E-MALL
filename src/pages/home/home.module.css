@@ -38,16 +38,27 @@
         gap: 1rem;
         flex-wrap: wrap;
         margin-bottom: 1rem;
-        button {
+        .chip {
             background-color: var(--color-text-muted) !important;
             padding: 0.25rem 0.5rem;
             font-size: 0.75rem;
+            cursor: pointer;
+            border: none;
+            border-radius: var(--radius-md);
+            color: var(--color-text-inverse);
+            transition: var(--transition-fast);
             &:hover {
                 background-color: var(--color-secondary) !important;
+                opacity: 0.8;
             }
             &:active {
-                border: none !important;
-                transform: scale(0.9) !important;
+                transform: scale(0.9);
+            }
+        }
+        .active {
+            background-color: var(--color-secondary) !important;
+            &:hover {
+                opacity: 1;
             }
         }
     }
@@ -63,6 +74,13 @@
         }
     }
 }
+
+.filter-category {
+    button:first-child {
+        background-color: var(--color-secondary) !important;
+    }
+}
+
 .option {
     display: grid;
     gap: 1rem;

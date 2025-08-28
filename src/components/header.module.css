@@ -38,6 +38,12 @@
                     background-color: var(--color-secondary);
                     opacity: 0.8;
                 }
+                a.active:hover,
+                a.active:focus {
+                    background-color: var(--color-secondary);
+                    color: var(--color-text-inverse);
+                    opacity: 1;
+                }
             }
             .burger-cont {
                 display: flex;

@@ -18,7 +18,7 @@ export async function Action({ request }) {
         ? (errors.passwordMatch = "Passwords do not match")
         : delete errors.passwordMatch;
     console.log(errors);
-    if (Object.keys(errors).length > 1) return errors;
+    if (Object.keys(errors).length > 0) return errors;
     console.log("no errors");
 
     return errors;

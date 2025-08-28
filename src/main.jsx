@@ -21,12 +21,13 @@ import Account from "./pages/account/account";
 const routes = createBrowserRouter(
     createRoutesFromElements(
         <>
-            <Route
-                element={<Header />}
-                errorElement={<ErrorPage />}
-                action={headerAction}
-            >
-                <Route index path="/" element={<Home />} />
+            <Route element={<Header />} errorElement={<ErrorPage />}>
+                <Route
+                    index
+                    path="/"
+                    element={<Home />}
+                    action={headerAction}
+                />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/account" element={<Account />}>
