@@ -3,7 +3,13 @@ export default function Input({ type, name, placehoder, labelName }) {
     return (
         <label className={styles["label"]}>
             {labelName && <h4>{labelName}</h4>}
-            <input type={type} name={name} placeholder={placehoder} min={1} />
+            <input
+                type={type}
+                name={name}
+                placeholder={placehoder}
+                min={1}
+                minLength={type === "password" ? 8 : 0}
+            />
         </label>
     );
 }

@@ -21,12 +21,21 @@ export async function Action({ request }) {
     if (Object.keys(errors).length > 0) return errors;
     console.log("no errors");
 
-    return errors;
+    return {
+        email,
+        details: { username, password, confirmPassword },
+        sucess: true,
+    };
 }
 
 export default function SignUp() {
     const data = useActionData();
-    console.log(data?.passwordMatch);
+    console.table(data);
+    function saveTolocalStorage(key, details) {
+        localStorage.setItem(key, JSON.stringify(details));
+    }
+    data?.email ? saveTolocalStorage(data?.email, data?.details) : null;
+    console.log(localStorage);
     return (
         <div
             className={`${styles["form-container"]} 
@@ -57,7 +66,11 @@ export default function SignUp() {
                     placehoder={"********"}
                     labelName={"Confirm Password"}
                 />
-                <p>{data?.passwordMatch}</p>
+                <p className={styles["error-msg"]}>
+                    {data?.passwordLength
+                        ? data?.passwordLength
+                        : data?.passwordMatch}
+                </p>
 
                 <Button type={"submit"} label={"Sign Up"} />
             </Form>

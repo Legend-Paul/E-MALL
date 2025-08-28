@@ -13,7 +13,6 @@ export default function Account() {
         setRoute((route) => (route !== "sign-in" ? "sign-in" : "sign-up"));
         navigate(`/account/${route}`);
     };
-    console.log(route !== "sign-up" ? "sign-up-margin" : "");
 
     return (
         <section

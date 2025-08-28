@@ -38,3 +38,7 @@
 .move-form {
     transform: translateX(-300%);
 }
+
+.error-msg {
+    color: var(--color-error);
+}
