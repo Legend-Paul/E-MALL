@@ -12,6 +12,8 @@
 }
 .contact-content {
     position: relative;
+    display: grid;
+    gap: 1.5rem;
 }
 .heading-container {
     background-image: url("../../assets/images/logo.png");
@@ -72,7 +74,7 @@
 
 .f-a-q {
     width: 40%;
-    margin-top: 1.5rem;
+
     .questions {
         display: grid;
         gap: 1rem;
@@ -90,13 +92,39 @@
         }
     }
 }
-
-@media screen and (width < 1000) {
+@media screen and (width < 1000px) {
     .form-container {
-        width: 50% !important;
-        background-color: red !important;
+        width: 50%;
+    }
+}
+@media screen and (width < 750px) {
+    .form-container {
+        top: -3rem;
+        right: 50%;
+        translate: 50%;
+        min-width: 20rem;
+        place-self: center;
+    }
+    .heading-container {
+        .heading {
+            place-items: center;
+            width: 100%;
+            h2,
+            p {
+                margin-top: -1rem;
+                max-width: 100%;
+                text-align: center;
+            }
+        }
     }
     .contact-content {
-        background-color: red !important;
+        padding-top: 28rem;
+        place-content: center;
+    }
+    .f-a-q {
+        width: 100%;
+    }
+    .social-media-icons {
+        width: 100%;
     }
 }
