@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import indexStyles from "../../index.module.css";
 import styles from "./account.module.css";
 import { useState } from "react";
+import Button from "../../components/button";
 
 export default function Account() {
     const [route, setRoute] = useState("sign-up");
@@ -11,17 +12,17 @@ export default function Account() {
     const path = location.pathname.split("/").filter(Boolean);
     const lastPath = path[path.length - 1];
 
+    // localStorage.clear();
+    const users = JSON.parse(localStorage.getItem("users"));
+
     const changeRoute = () => {
-        console.log(route);
         setRoute((route) => (route !== "sign-in" ? "sign-in" : "sign-up"));
         navigate(`/account/${route}`);
     };
-    console.log(lastPath);
-    console.log(
-        route === "sign-up" || lastPath === "sign-up"
-            ? "Sign in here"
-            : "Sign up here"
-    );
+    let signedUser = null;
+    if (users) signedUser = users.find((user) => user.isSignedIn);
+
+    console.log(localStorage);
 
     return (
         <section
@@ -29,35 +30,60 @@ export default function Account() {
                 styles[`${route !== "sign-up" ? "sign-up-margin" : ""}`]
             }`}
         >
-            <div className={styles["account"]}>
-                <div
-                    className={`${styles["description"]} 
+            {!signedUser ? (
+                <div className={styles["account"]}>
+                    <div
+                        className={`${styles["description"]} 
                     }`}
-                >
-                    <h2>
-                        {lastPath !== "sign-up"
-                            ? "Sign in here"
-                            : "Sign up here"}
-                    </h2>
+                    >
+                        <h2>
+                            {lastPath !== "sign-up"
+                                ? "Sign in here"
+                                : "Sign up here"}
+                        </h2>
 
-                    <p>
-                        {lastPath !== "sign-up"
-                            ? "If you dont have an account"
-                            : "If you have an account"}{" "}
-                        <button onClick={changeRoute}> {route}</button>
-                    </p>
+                        <p>
+                            {lastPath !== "sign-up"
+                                ? "If you dont have an account"
+                                : "If you have an account"}{" "}
+                            <button onClick={changeRoute}> {route}</button>
+                        </p>
+                    </div>
+                    <Outlet />
                 </div>
-                <Outlet />
-            </div>
+            ) : (
+                <LogOut />
+            )}
         </section>
     );
 }
 
 function LogOut() {
-    const username = JSON.parse(localStorage.getItem());
+    const navigate = useNavigate();
+    const users = JSON.parse(localStorage.getItem("users"));
+    let signedUser = null;
+    if (users) signedUser = users.find((user) => user.isSignedIn);
+    console.log(signedUser);
+
+    function handleSignoutClick() {
+        const updatedUsers = users.map((user) => {
+            console.log(user);
+            console.log(signedUser);
+            console.log(localStorage);
+            return user.email === signedUser?.email
+                ? { ...user, ["isSignedIn"]: false }
+                : user;
+        });
+        localStorage.setItem("users", JSON.stringify(updatedUsers));
+        navigate("/account/sign-in");
+        console.log("finished");
+    }
+
     return (
-        <div>
-            <h2>Log Out</h2>.
+        <div className={styles["sign-out"]}>
+            <h2>Hello, {signedUser ? signedUser.details.username : ""}</h2>
+            <p>You have already signed in to your account</p>
+            <Button label="Sign Out" handleClick={handleSignoutClick} />
         </div>
     );
 }

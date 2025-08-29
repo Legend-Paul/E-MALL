@@ -67,7 +67,16 @@
         margin-left: 0 !important;
     }
 }
-
+.sign-out {
+    background-color: var(--color-surface);
+    display: grid;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    margin-top: -2rem;
+    box-shadow: var(--shadow-md);
+    place-self: center;
+}
 @media screen and (width < 710px) {
     .sign-up-margin {
         padding-bottom: 1rem;
