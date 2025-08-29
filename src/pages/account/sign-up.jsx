@@ -1,5 +1,5 @@
 import styles from "./sign-in-sign-up.module.css";
-import { Form, NavLink, useActionData, useNavigate } from "react-router-dom";
+import { Form, NavLink, redirect, useActionData } from "react-router-dom";
 import Button from "../../components/button";
 import Input from "../../components/input";
 
@@ -35,21 +35,15 @@ export async function Action({ request }) {
         : delete errors.emailExist;
 
     if (Object.keys(errors).length > 0) return errors;
-
-    return user;
+    console.log(users);
+    const allUsers = users || [];
+    allUsers.push(user);
+    localStorage.setItem("users", JSON.stringify(allUsers));
+    return redirect("/");
 }
 
 export default function SignUp() {
-    const navigate = useNavigate();
     const data = useActionData();
-
-    function saveTolocalStorage(user) {
-        const users = JSON.parse(localStorage.getItem("users")) || [];
-        users.push(user);
-        localStorage.setItem("users", JSON.stringify(users));
-        return navigate("/");
-    }
-    data?.email ? saveTolocalStorage(data) : null;
 
     return (
         <div

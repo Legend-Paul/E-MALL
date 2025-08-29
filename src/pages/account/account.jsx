@@ -12,7 +12,7 @@ export default function Account() {
     const location = useLocation();
     const path = location.pathname.split("/").filter(Boolean);
     const lastPath = path[path.length - 1];
-
+    // slocalStorage.clear();
     const users = JSON.parse(localStorage.getItem("users"));
 
     const changeRoute = () => {

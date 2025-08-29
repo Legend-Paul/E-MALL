@@ -19,7 +19,7 @@ import SignUp, { Action as signUpAction } from "./pages/account/sign-up";
 import Account from "./pages/account/account";
 import ForgotPassword, {
     Action as forgotPassworAction,
-} from "./pages/account/forgot-Passwor";
+} from "./pages/account/forgot-password";
 
 const routes = createBrowserRouter(
     createRoutesFromElements(
