@@ -17,7 +17,11 @@
     composes: btn;
     background-color: var(--color-primary) !important;
 }
-.primary {
+.secondary {
     composes: btn;
-    background-color: var(--color-secodary);
+    background-color: var(--color-secodary) !important;
+}
+.error {
+    composes: btn;
+    background-color: var(--color-error) !important;
 }

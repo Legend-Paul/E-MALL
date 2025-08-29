@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./account.module.css";
 import toggleSignInUser from "../../utils/toggleSignIn";
+import Button from "../../components/button";
 
 export default function LogOut() {
     const navigate = useNavigate();
@@ -17,7 +18,11 @@ export default function LogOut() {
         <div className={styles["sign-out"]}>
             <h2>Hello, {signedUser ? signedUser.details.username : ""}</h2>
             <p>You have already signed in to your account</p>
-            <Button label="Sign Out" handleClick={handleSignoutClick} />
+            <Button
+                label="Sign Out"
+                handleClick={handleSignoutClick}
+                color={"error"}
+            />
         </div>
     );
 }

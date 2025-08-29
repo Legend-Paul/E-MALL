@@ -3,6 +3,7 @@ import styles from "./sign-in-sign-up.module.css";
 
 import Button from "../../components/button";
 import Input from "../../components/input";
+import toggleSignInUser from "../../utils/toggleSignIn";
 
 export async function Action({ request }) {
     const formDat = await request.formData();
@@ -11,20 +12,24 @@ export async function Action({ request }) {
     const users = JSON.parse(localStorage.getItem("users"));
     const error = {};
     // !users ? redirect("/account/sign-in") : delete error.className;
+    console.log();
+    let user = null;
     if (users)
-        users.some((user) => user.email !== email)
-            ? (error.name = "Inalid email or password")
-            : delete error.className;
-    if (users) {
-        const user = users.find((user) => user.email === email);
-        if (user)
-            user.details.password !== password
-                ? (error.name = "Inalid email or password")
-                : delete error.className;
-    }
-
+        user = users.find(
+            (user) => user.email === email && user.details.password === password
+        );
+    !user && users ? (error.name = "Inalid email or password") : user;
+    console.log(users);
+    console.log(error);
     if (Object.keys(error).length > 0) return error;
-    return !users ? redirect("/account/sign-up") : redirect("/");
+
+    if (users) {
+        const signingUser = users.find((user) => user.email === email);
+        toggleSignInUser(users, signingUser);
+        return redirect("/");
+    } else {
+        return redirect("/account/sign-up");
+    }
 }
 
 export default function SignIn() {
