@@ -13,18 +13,26 @@
     max-width: 30rem;
     transition: outline-color 0.2s;
 }
+textarea {
+    padding: 0.5rem;
+    border: 2px solid var(--color-text-muted);
+    border-radius: var(--radius-md);
+}
 
 /* Focused: info color */
-.label input:focus {
+.label input:focus,
+textarea:focus {
     outline-color: var(--color-info);
 }
 
 /* Not focused, has value, and valid: success color */
-.label input:not(:focus):not(:placeholder-shown):valid {
+.label input:not(:focus):not(:placeholder-shown):valid,
+textarea:not(:focus):not(:placeholder-shown):valid {
     outline-color: var(--color-success);
 }
 
 /* Not focused, has value, and invalid: error color */
-.label input:not(:focus):not(:placeholder-shown):invalid {
+.label input:not(:focus):not(:placeholder-shown):invalid,
+textarea:not(:focus):not(:placeholder-shown):invalid {
     outline-color: var(--color-error);
 }

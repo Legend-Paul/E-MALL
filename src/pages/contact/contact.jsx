@@ -2,7 +2,7 @@ import styles from "./contact.module.css";
 import Input from "../../components/input";
 import Button from "../../components/button";
 import { Form } from "react-router-dom";
-// import image from "../../assets/images/logo.png"
+import Textarea from "../../components/textarea";
 
 export default function Contact() {
     return (
@@ -30,15 +30,12 @@ export default function Contact() {
                             name={"email"}
                             placehoder={"example@gmail.com"}
                         />
-                        <label>
-                            <h4>Message</h4>
-                            <textarea
-                                name="message"
-                                cols={10}
-                                rows={5}
-                            ></textarea>
-                        </label>
-                        <Button label="Send Message" />
+                        <Textarea
+                            labelName={"Message"}
+                            placehoder={"Enter message"}
+                            name={"message"}
+                        />
+                        <Button label="Send Message" color="secondary" />
                     </Form>
                 </div>
                 <div className={styles["social-media-icons"]}>

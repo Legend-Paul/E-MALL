@@ -19,7 +19,7 @@
 }
 .secondary {
     composes: btn;
-    background-color: var(--color-secodary) !important;
+    background-color: var(--color-secondary) !important;
 }
 .error {
     composes: btn;
