@@ -17,25 +17,40 @@ export async function Action({ request }) {
     password !== confirmPassword
         ? (errors.passwordMatch = "Passwords do not match")
         : delete errors.passwordMatch;
-    console.log(errors);
-    if (Object.keys(errors).length > 0) return errors;
-    console.log("no errors");
 
-    return {
+    const users = JSON.parse(localStorage.getItem("users"));
+    const user = {
         email,
         details: { username, password, confirmPassword },
-        sucess: true,
+        isSignedIn: true,
     };
+
+    let hasEmail = null;
+    if (Array.isArray(users)) {
+        hasEmail = users.some((user) => user.email === email);
+    }
+
+    hasEmail
+        ? (errors.emailExist = "Email already exist")
+        : delete errors.emailExist;
+
+    if (Object.keys(errors).length > 0) return errors;
+
+    return user;
 }
 
 export default function SignUp() {
     const navigate = useNavigate();
     const data = useActionData();
-    function saveTolocalStorage(key, details) {
-        localStorage.setItem(key, JSON.stringify(details));
+
+    function saveTolocalStorage(user) {
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+        users.push(user);
+        localStorage.setItem("users", JSON.stringify(users));
+
         navigate("/");
     }
-    data?.email ? saveTolocalStorage(data?.email, data?.details) : null;
+    data?.email ? saveTolocalStorage(data) : null;
 
     return (
         <div
@@ -47,7 +62,7 @@ export default function SignUp() {
                     type={"text"}
                     name={"username"}
                     placehoder={"Paul"}
-                    labelName={"username"}
+                    labelName={"Username"}
                 />
                 <Input
                     type={"email"}
@@ -55,6 +70,8 @@ export default function SignUp() {
                     placehoder={"example@gmail.com"}
                     labelName={"Email"}
                 />
+                <p className={styles["error-msg"]}>{data?.emailExist}</p>
+
                 <Input
                     type={"password"}
                     name={"password"}

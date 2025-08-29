@@ -8,19 +8,27 @@ export async function Action({ request }) {
     const formDat = await request.formData();
     const email = formDat.get("email");
     const password = formDat.get("password");
-    const details = JSON.parse(localStorage.getItem(email));
+    const users = JSON.parse(localStorage.getItem("users"));
     const error = {};
-    !details || details?.password !== password
-        ? (error.name = "Inalid email or password")
-        : delete error.className;
+    // !users ? redirect("/account/sign-in") : delete error.className;
+    if (users)
+        users.some((user) => user.email !== email)
+            ? (error.name = "Inalid email or password")
+            : delete error.className;
+    if (users) {
+        const user = users.find((user) => user.email === email);
+        if (user)
+            user.details.password !== password
+                ? (error.name = "Inalid email or password")
+                : delete error.className;
+    }
 
     if (Object.keys(error).length > 0) return error;
-    return redirect("/");
+    return !users ? redirect("/account/sign-up") : redirect("/");
 }
 
 export default function SignIn() {
     const error = useActionData();
-
     return (
         <div
             className={`${styles["form-container"]}
