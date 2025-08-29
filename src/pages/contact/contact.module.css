@@ -1,0 +1,93 @@
+.contact-page {
+    padding: 0;
+    margin: 4.7rem 0;
+    width: 100%;
+}
+
+.heading,
+.contact-content {
+    margin: auto;
+    padding: 1.5rem;
+    max-width: 1300px;
+}
+
+.heading-container {
+    background-image: url("../../assets/images/logo.png");
+    height: 18rem;
+    color: var(--color-text-inverse);
+    place-content: center;
+    width: 100%;
+
+    .heading {
+        display: grid;
+        gap: 1rem;
+
+        h2,
+        p {
+            max-width: 40%;
+        }
+    }
+}
+
+.form-container {
+    position: fixed;
+    top: 8rem;
+    right: 3rem;
+    width: 30rem;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-md);
+    form {
+        display: grid;
+        gap: 1.5rem;
+        width: 100%;
+    }
+    label {
+        display: grid;
+        gap: 1rem;
+        width: 100%;
+        input {
+            width: 100%;
+        }
+        textarea {
+            padding: 0.5rem;
+        }
+    }
+}
+
+.social-media-icons {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 40%;
+    gap: 1.5rem;
+    .icon {
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+        background-color: var(--color-secondary);
+        cursor: pointer;
+    }
+}
+
+.f-a-q {
+    width: 40%;
+    margin-top: 1.5rem;
+    .questions {
+        display: grid;
+        gap: 1rem;
+        h3 {
+            font-size: 1.5rem;
+        }
+        details {
+            summary {
+                font-weight: 600;
+            }
+            p {
+                margin-top: -0.5rem;
+                padding: 1rem;
+            }
+        }
+    }
+}

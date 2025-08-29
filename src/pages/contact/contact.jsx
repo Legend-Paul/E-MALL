@@ -16,7 +16,7 @@ export default function Contact() {
                     </p>
                 </div>
             </div>
-            <div className="contact-content">
+            <div className={styles["contact-content"]}>
                 <div className={styles["form-container"]}>
                     <Form method="POST">
                         <Input
