@@ -5,7 +5,7 @@ import Input from "../../components/input";
 import { useState } from "react";
 
 export default function Home() {
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
     const [activeChip, setActiveChip] = useState({
         category: [
             { name: "All", active: true },
