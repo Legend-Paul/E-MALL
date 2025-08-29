@@ -53,6 +53,7 @@ export default function SignIn() {
                     labelName={"Password"}
                 />
                 <p className={styles["error-msg"]}>{error?.name}</p>
+                <Link to="/account/forgot-password">Forgot password?</Link>
 
                 <Button type={"submit"} label={"Sign In"} />
             </Form>

@@ -17,6 +17,9 @@ import Contact from "./pages/contact";
 import SignIn, { Action as signInAction } from "./pages/account/sign-in";
 import SignUp, { Action as signUpAction } from "./pages/account/sign-up";
 import Account from "./pages/account/account";
+import ForgotPassword, {
+    Action as forgotPassworAction,
+} from "./pages/account/forgot-Passwor";
 
 const routes = createBrowserRouter(
     createRoutesFromElements(
@@ -41,6 +44,11 @@ const routes = createBrowserRouter(
                         path="sign-in"
                         element={<SignIn />}
                         action={signInAction}
+                    />
+                    <Route
+                        path="forgot-password"
+                        element={<ForgotPassword />}
+                        action={forgotPassworAction}
                     />
                 </Route>
             </Route>

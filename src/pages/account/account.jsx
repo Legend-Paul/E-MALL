@@ -13,7 +13,6 @@ export default function Account() {
     const path = location.pathname.split("/").filter(Boolean);
     const lastPath = path[path.length - 1];
 
-    // localStorage.clear();
     const users = JSON.parse(localStorage.getItem("users"));
 
     const changeRoute = () => {
@@ -22,8 +21,6 @@ export default function Account() {
     };
     let signedUser = null;
     if (users) signedUser = users.find((user) => user.isSignedIn);
-
-    console.log(localStorage);
 
     return (
         <section
@@ -39,15 +36,30 @@ export default function Account() {
                     >
                         <h2>
                             {lastPath !== "sign-up"
-                                ? "Sign in here"
+                                ? lastPath === "forgot-password"
+                                    ? "Change Passwod"
+                                    : "Sign in here"
                                 : "Sign up here"}
                         </h2>
 
                         <p>
                             {lastPath !== "sign-up"
-                                ? "If you dont have an account"
+                                ? lastPath === "forgot-password"
+                                    ? "Go back to"
+                                    : "If you dont have an account"
                                 : "If you have an account"}{" "}
-                            <button onClick={changeRoute}> {route}</button>
+                            <button
+                                onClick={
+                                    lastPath === "forgot-password"
+                                        ? () => navigate(-1)
+                                        : changeRoute
+                                }
+                            >
+                                {" "}
+                                {lastPath === "forgot-password"
+                                    ? "Sign In"
+                                    : route}
+                            </button>
                         </p>
                     </div>
                     <Outlet />
