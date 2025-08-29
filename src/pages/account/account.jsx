@@ -4,6 +4,7 @@ import indexStyles from "../../index.module.css";
 import styles from "./account.module.css";
 import { useState } from "react";
 import Button from "../../components/button";
+import LogOut from "./signout";
 
 export default function Account() {
     const [route, setRoute] = useState("sign-up");
@@ -55,35 +56,5 @@ export default function Account() {
                 <LogOut />
             )}
         </section>
-    );
-}
-
-function LogOut() {
-    const navigate = useNavigate();
-    const users = JSON.parse(localStorage.getItem("users"));
-    let signedUser = null;
-    if (users) signedUser = users.find((user) => user.isSignedIn);
-    console.log(signedUser);
-
-    function handleSignoutClick() {
-        const updatedUsers = users.map((user) => {
-            console.log(user);
-            console.log(signedUser);
-            console.log(localStorage);
-            return user.email === signedUser?.email
-                ? { ...user, ["isSignedIn"]: false }
-                : user;
-        });
-        localStorage.setItem("users", JSON.stringify(updatedUsers));
-        navigate("/account/sign-in");
-        console.log("finished");
-    }
-
-    return (
-        <div className={styles["sign-out"]}>
-            <h2>Hello, {signedUser ? signedUser.details.username : ""}</h2>
-            <p>You have already signed in to your account</p>
-            <Button label="Sign Out" handleClick={handleSignoutClick} />
-        </div>
     );
 }
