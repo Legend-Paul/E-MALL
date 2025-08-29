@@ -4,6 +4,7 @@ import styles from "./header.module.css";
 import Input from "./input";
 import Button from "./button";
 import { useState } from "react";
+import logo from "../assets/images/logo.png";
 
 export async function Action({ request }) {
     const data = await request.formData();
@@ -23,9 +24,12 @@ export default function Header() {
             <div className={styles["header-styles"]}>
                 <header>
                     <div className={styles["logo-search"]}>
-                        <h1>
-                            <NavLink to="/">E-MALL</NavLink>
-                        </h1>
+                        <NavLink to="/">
+                            <img
+                                src={logo}
+                                alt="Logo image with dark blue background"
+                            />
+                        </NavLink>
 
                         <Form method="post" action="/">
                             <Input

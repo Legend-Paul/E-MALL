@@ -29,9 +29,9 @@
                 a.active {
                     color: var(--color-text-inverse);
                     border: none;
-
                     background-color: var(--color-secondary);
                     width: 100% !important;
+                    transition: var(--transition-fast);
                 }
                 a:hover,
                 a:hover:not(:active) {
@@ -67,11 +67,15 @@
         gap: 1rem;
 
         align-items: center;
-        h1 {
-            width: 100%;
-            a {
-                text-decoration: none;
-                color: var(--color-text-inverse);
+
+        a {
+            text-decoration: none;
+            color: var(--color-text-inverse);
+            display: flex;
+            align-items: center;
+            img {
+                width: 50px;
+                border-radius: var(--radius-sm);
             }
         }
 
