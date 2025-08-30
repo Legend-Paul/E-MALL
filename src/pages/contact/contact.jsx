@@ -72,17 +72,7 @@ export default function Contact() {
                 <div className={styles["f-a-q"]}>
                     <div className={styles["questions"]}>
                         <h3>F A Q</h3>
-                        <details>
-                            <summary>
-                                Do your product come with waranty?
-                            </summary>
-                            <p>
-                                <em>
-                                    Yes! All our electronics come with a
-                                    standard manufacturer's waranty (6-12months){" "}
-                                </em>
-                            </p>
-                        </details>
+
                         <details>
                             <summary>
                                 Do your product come with waranty?

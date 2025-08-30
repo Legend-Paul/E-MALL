@@ -2,6 +2,7 @@
     padding: 0;
     margin: 4.7rem 0;
     width: 100%;
+    overflow: hidden;
 }
 
 .heading,
@@ -16,7 +17,7 @@
     gap: 3rem;
 }
 .heading-container {
-    background-image: url("../../assets/images/contact-cellphone.jpg");
+    background-image: url("../../assets/images/contact-social-icons.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -69,6 +70,8 @@
     border-radius: var(--radius-md);
     background-color: var(--color-surface);
     box-shadow: var(--shadow-md);
+    animation: slideLeft 1s linear;
+
     form {
         display: grid;
         gap: 1.5rem;
@@ -88,6 +91,7 @@
     display: grid;
     width: 40%;
     gap: 1.5rem;
+
     li {
         list-style: none;
     }
@@ -135,6 +139,16 @@
         }
     }
 }
+
+@keyframes slideLeft {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
 @media screen and (width < 1000px) {
     .form-container {
         width: 50%;
