@@ -1,6 +1,5 @@
 .contact-page {
     padding: 0;
-    margin: 4.7rem 0;
     width: 100%;
     overflow: hidden;
 }
@@ -22,7 +21,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: scroll;
-    height: 18rem;
+    height: 22rem;
     color: var(--color-text-inverse);
     place-content: center;
     position: relative;

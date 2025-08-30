@@ -1,11 +1,13 @@
 .header-styles {
     position: fixed;
     z-index: var(--z-header);
-    top: 0;
-    width: 100%;
+    top: 1rem;
+    right: 0.5rem;
+    left: 0.5rem;
     background-color: var(--color-primary);
     color: var(--color-text-inverse);
     box-shadow: var(--shadow-md);
+    border-radius: 5rem;
     nav {
         width: 100%;
         ul {
@@ -31,6 +33,7 @@
                     }
                     p {
                         font-size: 0.75rem;
+                        color: var(--color-text-inverse);
                     }
                 }
                 a.active {
@@ -39,14 +42,14 @@
                     width: 100% !important;
                     transition: var(--transition-fast);
                     p {
-                        color: white;
+                        color: var(--color-text-inverse);
                     }
                 }
                 a:hover {
-                    color: var(--color-secondary);
+                    color: var(--color-secondary) !important;
                     opacity: 0.8;
                     p {
-                        color: white;
+                        color: var(--color-text-inverse);
                     }
                 }
                 a.active:hover,
@@ -80,7 +83,8 @@
         gap: 1rem;
 
         align-items: center;
-
+        padding: 0.25rem 1rem;
+        justify-content: space-between;
         a {
             text-decoration: none;
             color: var(--color-text-inverse);
@@ -170,15 +174,36 @@
                 border-bottom: 2px solid var(--color-accent);
                 width: 100%;
                 a {
-                    display: block;
-
-                    padding: 1rem !important;
+                    display: flex;
+                    gap: 1.5rem;
+                    padding: 0.75rem !important;
                 }
                 a.active {
-                    color: aliceblue;
+                    color: var(--color-text-inverse);
                     border: none;
                     background-color: var(--color-secondary);
                     width: 100% !important;
+                    i {
+                        color: var(--color-text-inverse);
+                    }
+                }
+                a:hover {
+                    background-color: var(--color-secondary);
+                    opacity: 0.8;
+                    i {
+                        color: var(--color-text-inverse);
+                    }
+                    p {
+                        color: var(--color-text-inverse);
+                    }
+                }
+                a.active:hover,
+                a.active:focus {
+                    background-color: var(--color-secondary);
+                    opacity: 1;
+                    p {
+                        color: white;
+                    }
                 }
             }
         }

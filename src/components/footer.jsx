@@ -103,10 +103,10 @@ export default function Footer() {
                             </Link>
                         </li>
                         <li>
-                            <Link to="tel:+1234567890">
+                            <Link to="tel:+254708521286">
                                 {" "}
                                 <i className="bi bi-telephone-fill"></i>{" "}
-                                <p>+123 456 7890</p>
+                                <p>+2547 08 521 286</p>
                             </Link>
                         </li>
                         <li>
