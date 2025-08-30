@@ -56,8 +56,8 @@ export default function Header() {
                                             isActive ? styles["active"] : ""
                                         }
                                     >
-                                        {/* <i className="bi bi-house-door-fill"></i> */}
-                                        Home
+                                        <i class="bi bi-house-fill me-2"></i>
+                                        <p>Home</p>
                                     </NavLink>
                                 </li>
                                 <li className={styles["burger-md"]}>
@@ -67,7 +67,9 @@ export default function Header() {
                                             isActive ? styles["active"] : ""
                                         }
                                     >
-                                        About
+                                        {" "}
+                                        <i class="bi bi-info-circle-fill me-2"></i>
+                                        <p>About</p>
                                     </NavLink>
                                 </li>
                                 <li className={styles["burger-md"]}>
@@ -77,7 +79,8 @@ export default function Header() {
                                             isActive ? styles["active"] : ""
                                         }
                                     >
-                                        Contact
+                                        <i class="bi bi-envelope-fill me-2"></i>
+                                        <p>Contact</p>
                                     </NavLink>
                                 </li>
 
@@ -88,7 +91,9 @@ export default function Header() {
                                             isActive ? styles["active"] : ""
                                         }
                                     >
-                                        Orders
+                                        {" "}
+                                        <i class="bi bi-box-seam-fill me-2"></i>
+                                        <p>Orders</p>
                                     </NavLink>
                                 </li>
                                 <li className={styles["burger-md"]}>
@@ -98,7 +103,9 @@ export default function Header() {
                                             isActive ? styles["active"] : ""
                                         }
                                     >
-                                        Liked
+                                        {" "}
+                                        <i class="bi bi-heart-fill"></i>
+                                        <p>Liked</p>
                                     </NavLink>
                                 </li>
                                 <li className={styles["burger-xsm"]}>
@@ -108,7 +115,8 @@ export default function Header() {
                                             isActive ? styles["active"] : ""
                                         }
                                     >
-                                        Account
+                                        <i class="bi bi-person-circle me-2"></i>{" "}
+                                        <p>Account</p>
                                     </NavLink>
                                 </li>
                                 <li>
@@ -118,7 +126,8 @@ export default function Header() {
                                             isActive ? styles["active"] : ""
                                         }
                                     >
-                                        Cart
+                                        <i class="bi bi-cart-fill me-2"></i>
+                                        <p>Cart</p>
                                     </NavLink>
                                 </li>
                                 <li
@@ -151,8 +160,8 @@ export default function Header() {
                                         isActive ? styles["active"] : ""
                                     }
                                 >
-                                    {/* <i className="bi bi-house-door-fill"></i> */}
-                                    Home
+                                    <i class="bi bi-house-fill me-2"></i>
+                                    <p>Home</p>
                                 </NavLink>
                             </li>
                             <li className={styles["burger-md"]}>
@@ -162,7 +171,8 @@ export default function Header() {
                                         isActive ? styles["active"] : ""
                                     }
                                 >
-                                    About
+                                    <i class="bi bi-info-circle-fill me-2"></i>
+                                    <p>About</p>
                                 </NavLink>
                             </li>
                             <li className={styles["burger-md"]}>
@@ -172,8 +182,8 @@ export default function Header() {
                                         isActive ? styles["active"] : ""
                                     }
                                 >
-                                    {/* <i class="bi bi-chat-right-dots-fill"></i> */}
-                                    Contact
+                                    <i class="bi bi-envelope-fill me-2"></i>
+                                    <p>Contact</p>
                                 </NavLink>
                             </li>
                             <li className={styles["burger-sm"]}>
@@ -183,7 +193,8 @@ export default function Header() {
                                         isActive ? styles["active"] : ""
                                     }
                                 >
-                                    Orders
+                                    <i class="bi bi-box-seam-fill me-2"></i>
+                                    <p>Orders</p>
                                 </NavLink>
                             </li>
                             <li className={styles["burger-xsm"]}>
@@ -193,7 +204,8 @@ export default function Header() {
                                         isActive ? styles["active"] : ""
                                     }
                                 >
-                                    Account
+                                    <i class="bi bi-person-circle me-2"></i>
+                                    <p>Account</p>
                                 </NavLink>
                             </li>
                             <li className={styles["burger-md"]}>
@@ -203,7 +215,8 @@ export default function Header() {
                                         isActive ? styles["active"] : ""
                                     }
                                 >
-                                    Liked
+                                    <i class="bi bi-heart-fill"></i>
+                                    <p>Liked</p>
                                 </NavLink>
                             </li>
                         </ul>

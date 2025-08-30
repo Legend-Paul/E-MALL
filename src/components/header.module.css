@@ -20,29 +20,42 @@
                     display: grid;
                     align-items: center;
                     justify-content: center;
+                    place-items: center;
                     transition: var(--transition-fast);
                     padding: 0.5rem !important;
                     border-radius: var(--radius-sm);
                     text-decoration: none;
                     color: var(--color-text-inverse);
+                    i {
+                        font-size: 1.5rem;
+                    }
+                    p {
+                        font-size: 0.75rem;
+                    }
                 }
                 a.active {
-                    color: var(--color-text-inverse);
+                    color: var(--color-secondary);
                     border: none;
-                    background-color: var(--color-secondary);
                     width: 100% !important;
                     transition: var(--transition-fast);
+                    p {
+                        color: white;
+                    }
                 }
-                a:hover,
-                a:hover:not(:active) {
-                    background-color: var(--color-secondary);
+                a:hover {
+                    color: var(--color-secondary);
                     opacity: 0.8;
+                    p {
+                        color: white;
+                    }
                 }
                 a.active:hover,
                 a.active:focus {
-                    background-color: var(--color-secondary);
-                    color: var(--color-text-inverse);
+                    color: var(--color-secondary);
                     opacity: 1;
+                    p {
+                        color: white;
+                    }
                 }
             }
             .burger-cont {
