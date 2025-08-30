@@ -8,6 +8,7 @@ export default function Contact() {
     return (
         <section className={`${styles["contact-page"]}`}>
             <div className={styles["heading-container"]}>
+                <div className="dark-bgc"></div>
                 <div className={styles["heading"]}>
                     <h2>What't on your mind?</h2>
                     <p>
