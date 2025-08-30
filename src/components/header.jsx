@@ -5,6 +5,7 @@ import Input from "./input";
 import Button from "./button";
 import { useState } from "react";
 import logo from "../assets/images/logo.png";
+import Footer from "./footer";
 
 export async function Action({ request }) {
     const data = await request.formData();
@@ -209,8 +210,8 @@ export default function Header() {
                     </nav>
                 </div>
             </div>
-
             <Outlet />
+            <Footer />
         </div>
     );
 }
