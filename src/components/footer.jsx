@@ -13,18 +13,46 @@ export default function Footer() {
                 </div>
                 <div className={styles["footer-section"]}>
                     <h3>Quick Links</h3>
-                    <ul>
+                    <ul className={styles["pages-link"]}>
                         <li>
-                            <NavLink to="/">Home</NavLink>
+                            <NavLink
+                                to="/"
+                                className={({ isActive }) =>
+                                    isActive ? styles["active"] : ""
+                                }
+                            >
+                                Home
+                            </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/about">About</NavLink>
+                            <NavLink
+                                to="/about"
+                                className={({ isActive }) =>
+                                    isActive ? styles["active"] : ""
+                                }
+                            >
+                                About
+                            </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/shop">Shop</NavLink>
+                            <NavLink
+                                to="/account"
+                                className={({ isActive }) =>
+                                    isActive ? styles["active"] : ""
+                                }
+                            >
+                                Account
+                            </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/contact">Contact</NavLink>
+                            <NavLink
+                                to="/contact"
+                                className={({ isActive }) =>
+                                    isActive ? styles["active"] : ""
+                                }
+                            >
+                                Contact
+                            </NavLink>
                         </li>
                     </ul>
                 </div>

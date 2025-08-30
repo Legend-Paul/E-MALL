@@ -39,7 +39,7 @@
                     font-size: var(--font-size-base);
 
                     &:hover {
-                        color: var(--color-primary-dark);
+                        color: var(--color-secondary);
                     }
                 }
             }
@@ -73,5 +73,12 @@
         color: var(--color-text-muted);
         font-size: var(--font-size-sm);
         margin: 0;
+    }
+}
+.pages-link {
+    li {
+        a.active {
+            color: var(--color-secondary) !important;
+        }
     }
 }

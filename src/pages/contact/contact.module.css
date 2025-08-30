@@ -13,7 +13,7 @@
 .contact-content {
     position: relative;
     display: grid;
-    gap: 1.5rem;
+    gap: 3rem;
 }
 .heading-container {
     background-image: url("../../assets/images/logo.png");
@@ -58,17 +58,33 @@
 }
 
 .social-media-icons {
-    display: flex;
-    justify-content: start;
-    align-items: center;
+    display: grid;
     width: 40%;
     gap: 1.5rem;
+    li {
+        list-style: none;
+    }
+    .social-icons {
+        display: flex;
+        gap: 1.5rem;
+    }
+    h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
     .icon {
         width: 1.5rem;
-        height: 1.5rem;
         border-radius: 50%;
-        background-color: var(--color-secondary);
         cursor: pointer;
+        i {
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            transition: var(--transition-medium);
+            &:active {
+                font-size: 1.4rem;
+                color: var(--color-secondary);
+            }
+        }
     }
 }
 
@@ -119,7 +135,6 @@
     }
     .contact-content {
         padding-top: 28rem;
-        place-content: center;
     }
     .f-a-q {
         width: 100%;
