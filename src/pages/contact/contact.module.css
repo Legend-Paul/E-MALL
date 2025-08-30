@@ -21,7 +21,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: scroll;
-    height: 22rem;
+    height: 23rem;
     color: var(--color-text-inverse);
     place-content: center;
     position: relative;
@@ -35,8 +35,8 @@
         width: 100%;
         height: 100%;
         background-color: var(--color-background-dark);
-        opacity: 0.5;
-        transition: var(--transition-medium);
+        opacity: 0.6;
+        transition: 1s ease;
     }
 
     .heading {
@@ -44,12 +44,17 @@
         place-items: center;
         width: 100%;
         display: grid;
-        gap: 3rem;
-
+        gap: 1rem;
+        h2 {
+            font-size: 3rem;
+        }
+        p {
+            font-size: 1.25rem;
+        }
         h2,
         p {
             z-index: 100;
-            margin-top: -4rem;
+
             max-width: 100%;
             text-align: center;
         }
@@ -167,7 +172,6 @@
             width: 100%;
             h2,
             p {
-                margin-top: -1rem;
                 max-width: 100%;
                 text-align: center;
             }
