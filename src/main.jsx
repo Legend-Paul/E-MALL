@@ -12,7 +12,7 @@ import "./assets/variables.css";
 import ErrorPage from "./errorPage";
 import Header, { Action as headerAction } from "./components/header";
 import Home from "./pages/home/home";
-import About from "./pages/about";
+import About from "./pages/about/about";
 import Contact from "./pages/contact/contact";
 import SignIn, { Action as signInAction } from "./pages/account/sign-in";
 import SignUp, { Action as signUpAction } from "./pages/account/sign-up";
