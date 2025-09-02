@@ -1,4 +1,10 @@
+.home-page {
+    position: relative;
+}
 .user-options-cont {
+    position: absolute;
+    top: 1rem;
+    left: 1.5rem;
     max-width: 50%;
     overflow: hidden;
     .achordion {

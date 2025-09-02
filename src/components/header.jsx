@@ -56,7 +56,7 @@ export default function Header() {
                                             isActive ? styles["active"] : ""
                                         }
                                     >
-                                        <i class="bi bi-house-fill me-2"></i>
+                                        <i className="bi bi-house-fill me-2"></i>
                                         <p>Home</p>
                                     </NavLink>
                                 </li>
@@ -68,7 +68,7 @@ export default function Header() {
                                         }
                                     >
                                         {" "}
-                                        <i class="bi bi-info-circle-fill me-2"></i>
+                                        <i className="bi bi-info-circle-fill me-2"></i>
                                         <p>About</p>
                                     </NavLink>
                                 </li>
@@ -79,7 +79,7 @@ export default function Header() {
                                             isActive ? styles["active"] : ""
                                         }
                                     >
-                                        <i class="bi bi-envelope-fill me-2"></i>
+                                        <i className="bi bi-envelope-fill me-2"></i>
                                         <p>Contact</p>
                                     </NavLink>
                                 </li>
@@ -92,7 +92,7 @@ export default function Header() {
                                         }
                                     >
                                         {" "}
-                                        <i class="bi bi-box-seam-fill me-2"></i>
+                                        <i className="bi bi-box-seam-fill me-2"></i>
                                         <p>Orders</p>
                                     </NavLink>
                                 </li>
@@ -104,7 +104,7 @@ export default function Header() {
                                         }
                                     >
                                         {" "}
-                                        <i class="bi bi-heart-fill"></i>
+                                        <i className="bi bi-heart-fill"></i>
                                         <p>Liked</p>
                                     </NavLink>
                                 </li>
@@ -115,7 +115,7 @@ export default function Header() {
                                             isActive ? styles["active"] : ""
                                         }
                                     >
-                                        <i class="bi bi-person-circle me-2"></i>{" "}
+                                        <i className="bi bi-person-circle me-2"></i>{" "}
                                         <p>Account</p>
                                     </NavLink>
                                 </li>
@@ -126,7 +126,7 @@ export default function Header() {
                                             isActive ? styles["active"] : ""
                                         }
                                     >
-                                        <i class="bi bi-cart-fill me-2"></i>
+                                        <i className="bi bi-cart-fill me-2"></i>
                                         <p>Cart</p>
                                     </NavLink>
                                 </li>
@@ -160,7 +160,7 @@ export default function Header() {
                                         isActive ? styles["active"] : ""
                                     }
                                 >
-                                    <i class="bi bi-house-fill me-2"></i>
+                                    <i className="bi bi-house-fill me-2"></i>
                                     <p>Home</p>
                                 </NavLink>
                             </li>
@@ -171,7 +171,7 @@ export default function Header() {
                                         isActive ? styles["active"] : ""
                                     }
                                 >
-                                    <i class="bi bi-info-circle-fill me-2"></i>
+                                    <i className="bi bi-info-circle-fill me-2"></i>
                                     <p>About</p>
                                 </NavLink>
                             </li>
@@ -182,7 +182,7 @@ export default function Header() {
                                         isActive ? styles["active"] : ""
                                     }
                                 >
-                                    <i class="bi bi-envelope-fill me-2"></i>
+                                    <i className="bi bi-envelope-fill me-2"></i>
                                     <p>Contact</p>
                                 </NavLink>
                             </li>
@@ -193,7 +193,7 @@ export default function Header() {
                                         isActive ? styles["active"] : ""
                                     }
                                 >
-                                    <i class="bi bi-box-seam-fill me-2"></i>
+                                    <i className="bi bi-box-seam-fill me-2"></i>
                                     <p>Orders</p>
                                 </NavLink>
                             </li>
@@ -204,7 +204,7 @@ export default function Header() {
                                         isActive ? styles["active"] : ""
                                     }
                                 >
-                                    <i class="bi bi-person-circle me-2"></i>
+                                    <i className="bi bi-person-circle me-2"></i>
                                     <p>Account</p>
                                 </NavLink>
                             </li>
@@ -215,7 +215,7 @@ export default function Header() {
                                         isActive ? styles["active"] : ""
                                     }
                                 >
-                                    <i class="bi bi-heart-fill"></i>
+                                    <i className="bi bi-heart-fill"></i>
                                     <p>Liked</p>
                                 </NavLink>
                             </li>

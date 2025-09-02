@@ -3,8 +3,16 @@ import styles from "./home.module.css";
 import Button from "../../components/button";
 import Input from "../../components/input";
 import { useState } from "react";
+import { useLoaderData } from "react-router-dom";
+
+export async function Loader() {
+    const response = await fetch("https://fakestoreapi.com/products");
+    const data = await response.json();
+    return data;
+}
 
 export default function Home() {
+    const data = useLoaderData();
     const [isOpen, setIsOpen] = useState(false);
     const [activeChip, setActiveChip] = useState({
         category: [
@@ -32,6 +40,8 @@ export default function Home() {
             ),
         }));
     }
+    const firstData = data[0];
+    console.log(firstData);
 
     return (
         <section className={`${indexStyles["page"]} ${styles["home-page"]}`}>
@@ -128,6 +138,32 @@ export default function Home() {
                     </article>
                 }
             </div>
+            <main className={styles["main"]}>
+                <div className={styles["product-container"]}>
+                    {data.map((data) => {
+                        return (
+                            <div key={data.id} className={styles["product"]}>
+                                <div
+                                    className={
+                                        styles["product-image-container"]
+                                    }
+                                >
+                                    <img src={data.image} alt="" />
+                                </div>
+                                <div className={styles["description"]}>
+                                    <p className={styles["title"]}>
+                                        {data.title}
+                                    </p>
+                                    <h3 className={styles["price"]}>
+                                        Ksh. {data.price}
+                                    </h3>
+                                </div>
+                                <Button label="Add to cart" color="secondary" />
+                            </div>
+                        );
+                    })}
+                </div>
+            </main>
         </section>
     );
 }

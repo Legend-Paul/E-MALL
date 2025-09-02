@@ -11,7 +11,7 @@ import "./assets/variables.css";
 
 import ErrorPage from "./errorPage";
 import Header, { Action as headerAction } from "./components/header";
-import Home from "./pages/home/home";
+import Home, { Loader as homeLoader } from "./pages/home/home";
 import About from "./pages/about/about";
 import Contact from "./pages/contact/contact";
 import SignIn, { Action as signInAction } from "./pages/account/sign-in";
@@ -30,6 +30,7 @@ const routes = createBrowserRouter(
                     path="/"
                     element={<Home />}
                     action={headerAction}
+                    loader={homeLoader}
                 />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
