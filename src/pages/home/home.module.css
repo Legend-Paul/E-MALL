@@ -102,4 +102,51 @@
     opacity: 1;
     transform: scaleX(1);
     transition: var(--transition-slow);
+    /* z-index: 500 !important; */
+}
+.main {
+    margin-top: 5rem;
+}
+
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    .product,
+    .change-z-index {
+        /* border: 2px solid var(--color-primary); */
+        background-color: var(--color-surface);
+        box-shadow: var(--shadow-sm);
+        border-radius: var(--radius-md);
+        place-items: center;
+        place-content: center;
+        padding: 0.5rem 1rem;
+
+        .product-image-container {
+            max-width: 10rem;
+            img {
+                width: 100%;
+                aspect-ratio: 3/4;
+            }
+        }
+        .description {
+            width: 100%;
+            max-width: 10rem;
+            margin: 0 auto;
+            p {
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                margin: 0;
+            }
+        }
+    }
+    .product {
+        z-index: 100;
+    }
+    button {
+        width: 100%;
+        padding: 0.5rem 0;
+    }
 }

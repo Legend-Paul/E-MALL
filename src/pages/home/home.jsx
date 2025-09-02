@@ -13,7 +13,7 @@ export async function Loader() {
 
 export default function Home() {
     const data = useLoaderData();
-    const [isOpen, setIsOpen] = useState(false);
+    const [isFilterOptionOpen, setIsFilterOptionOpen] = useState(false);
     const [activeChip, setActiveChip] = useState({
         category: [
             { name: "All", active: true },
@@ -48,12 +48,12 @@ export default function Home() {
             <div className={styles["user-options-cont"]}>
                 <div
                     className={`${styles["achordion"]} ${
-                        isOpen ? styles["open-archodion"] : ""
+                        isFilterOptionOpen ? styles["open-archodion"] : ""
                     }`}
-                    onClick={() => setIsOpen(!isOpen)}
+                    onClick={() => setIsFilterOptionOpen(!isFilterOptionOpen)}
                 >
                     <h3>More Options </h3>
-                    {isOpen ? (
+                    {isFilterOptionOpen ? (
                         <i className="bi bi-caret-down-fill"></i>
                     ) : (
                         <i className="bi bi-caret-right-fill"></i>
@@ -63,7 +63,7 @@ export default function Home() {
                 {
                     <article
                         className={`${styles["user-options"]} ${
-                            isOpen
+                            isFilterOptionOpen
                                 ? styles["open-options"]
                                 : styles["hide-options"]
                         }`}
@@ -139,10 +139,21 @@ export default function Home() {
                 }
             </div>
             <main className={styles["main"]}>
-                <div className={styles["product-container"]}>
+                <div className={`${styles["product-container"]}`}>
                     {data.map((data) => {
                         return (
-                            <div key={data.id} className={styles["product"]}>
+                            <div
+                                key={data.id}
+                                className={
+                                    styles[
+                                        `${
+                                            isFilterOptionOpen
+                                                ? "change-z-index"
+                                                : "product"
+                                        }`
+                                    ]
+                                }
+                            >
                                 <div
                                     className={
                                         styles["product-image-container"]
