@@ -112,18 +112,18 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
-    .product,
-    .change-z-index {
-        /* border: 2px solid var(--color-primary); */
+    .product {
         background-color: var(--color-surface);
         box-shadow: var(--shadow-sm);
         border-radius: var(--radius-md);
         place-items: center;
         place-content: center;
         padding: 0.5rem 1rem;
+        transition: var(--transition-medium);
 
         .product-image-container {
             max-width: 10rem;
+            cursor: pointer;
             img {
                 width: 100%;
                 aspect-ratio: 3/4;
@@ -139,14 +139,29 @@
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 margin: 0;
+                margin-bottom: 0.5rem;
+            }
+            h3 {
+                margin-bottom: 0.5rem;
+                font-size: 1.5rem;
             }
         }
+        &:hover {
+            transform: scale(1.05);
+            box-shadow: var(--radius-md);
+        }
     }
-    .product {
+    .change-z-index {
         z-index: 100;
     }
     button {
         width: 100%;
         padding: 0.5rem 0;
+        margin-bottom: 0.5rem;
+        opacity: 0;
+        transition: var(--radius-md);
     }
+}
+.product:hover > button {
+    opacity: 1;
 }

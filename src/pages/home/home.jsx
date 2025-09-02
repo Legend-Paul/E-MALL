@@ -144,15 +144,13 @@ export default function Home() {
                         return (
                             <div
                                 key={data.id}
-                                className={
-                                    styles[
-                                        `${
-                                            isFilterOptionOpen
-                                                ? "change-z-index"
-                                                : "product"
-                                        }`
-                                    ]
+                                className={`${styles["product"]} ${
+                                    !isFilterOptionOpen
+                                        ? styles["change-z-index"]
+                                        : ""
                                 }
+                                        
+                                    `}
                             >
                                 <div
                                     className={
