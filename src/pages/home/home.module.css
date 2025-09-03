@@ -34,6 +34,9 @@
     border-radius: var(--radius-lg);
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    position: relative;
+    left: 0;
+    z-index: 50;
 }
 
 .filter-options {
@@ -93,9 +96,6 @@
     padding-left: 1rem;
 }
 
-.user-options {
-    z-index: 10000;
-}
 .hide-options {
     transition: var(--transition-slow);
     opacity: 0;
@@ -155,16 +155,16 @@
         }
     }
     .change-z-index {
-        z-index: 100;
+        z-index: 10;
     }
     button {
         width: 100%;
         padding: 0.5rem 0;
         margin-bottom: 0.5rem;
         border-radius: var(--radius-lg);
-        /* opacity: 0; */
-        /* display: none; */
-        /* transition: var(--radius-md); */
+        opacity: 0;
+        z-index: 1 !important;
+        transition: var(--radius-md);
     }
 }
 .product:hover > button {

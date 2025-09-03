@@ -78,97 +78,93 @@ export default function Home() {
                     )}
                 </div>
 
-                {
-                    <article
-                        className={`${styles["user-options"]} ${
-                            isFilterOptionOpen
-                                ? styles["open-options"]
-                                : styles["hide-options"]
-                        }`}
-                    >
-                        <div className={styles["filter-options"]}>
-                            <h3>
-                                <i className="bi bi-filter"></i> Filter By
-                            </h3>
+                <article
+                    className={`${styles["user-options"]} ${
+                        isFilterOptionOpen
+                            ? styles["open-options"]
+                            : styles["hide-options"]
+                    }`}
+                >
+                    <div className={styles["filter-options"]}>
+                        <h3>
+                            <i class="bi bi-funnel-fill me-2"></i> Filter By
+                        </h3>
 
-                            <div
-                                className={`${styles["filter-by"]} ${styles["option"]}`}
-                            >
-                                <h4>Options</h4>
-                                <div className={styles["filter-chips"]}>
-                                    {filterOptions.map((category, i) => (
-                                        <button
-                                            key={i}
-                                            className={`${styles["chip"]} ${
-                                                styles[
-                                                    category === activeChip
-                                                        ? "active"
-                                                        : ""
-                                                ]
-                                            }`}
-                                            onClick={() =>
-                                                handleFilterSetting(
-                                                    category,
-
-                                                    "filter-by",
-                                                    category === "All"
-                                                        ? null
-                                                        : category
-                                                )
-                                            }
-                                        >
-                                            {category}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div
-                                className={`${styles["filter-price"]} ${styles["option"]}`}
-                            >
-                                <h4>Price</h4>
-                                <div className={styles["price-input"]}>
-                                    <Input
-                                        labelName={"Min"}
-                                        placehoder={"Min Price"}
-                                        type={"number"}
-                                        value={
-                                            minPriceFilter ? minPriceFilter : ""
-                                        }
-                                        name={"min"}
-                                        handleOnchange={(e) =>
+                        <div
+                            className={`${styles["filter-by"]} ${styles["option"]}`}
+                        >
+                            <h4>Options</h4>
+                            <div className={styles["filter-chips"]}>
+                                {filterOptions.map((category, i) => (
+                                    <button
+                                        key={i}
+                                        className={`${styles["chip"]} ${
+                                            styles[
+                                                category === activeChip
+                                                    ? "active"
+                                                    : ""
+                                            ]
+                                        }`}
+                                        onClick={() =>
                                             handleFilterSetting(
-                                                null,
-                                                "min-price",
-                                                Number(e.target.value)
+                                                category,
+
+                                                "filter-by",
+                                                category === "All"
+                                                    ? null
+                                                    : category
                                             )
                                         }
-                                    />
-                                    <Input
-                                        labelName={"Max"}
-                                        placehoder={"Max Price"}
-                                        type={"number"}
-                                        value={
-                                            maxPriceFilter ? maxPriceFilter : ""
-                                        }
-                                        name={"max"}
-                                        handleOnchange={(e) =>
-                                            handleFilterSetting(
-                                                null,
-                                                "max-price",
-                                                Number(e.target.value)
-                                            )
-                                        }
-                                    />
-                                </div>
+                                    >
+                                        {category}
+                                    </button>
+                                ))}
                             </div>
                         </div>
-                        <div className="sort-options">
-                            <h4>Sort By</h4>
-                            <p>Price</p>
+
+                        <div
+                            className={`${styles["filter-price"]} ${styles["option"]}`}
+                        >
+                            <h4>Price</h4>
+                            <div className={styles["price-input"]}>
+                                <Input
+                                    labelName={"Min"}
+                                    placehoder={"Min Price"}
+                                    type={"number"}
+                                    value={minPriceFilter ? minPriceFilter : ""}
+                                    name={"min"}
+                                    handleOnchange={(e) =>
+                                        handleFilterSetting(
+                                            null,
+                                            "min-price",
+                                            Number(e.target.value)
+                                        )
+                                    }
+                                />
+                                <Input
+                                    labelName={"Max"}
+                                    placehoder={"Max Price"}
+                                    type={"number"}
+                                    value={maxPriceFilter ? maxPriceFilter : ""}
+                                    name={"max"}
+                                    handleOnchange={(e) =>
+                                        handleFilterSetting(
+                                            null,
+                                            "max-price",
+                                            Number(e.target.value)
+                                        )
+                                    }
+                                />
+                            </div>
                         </div>
-                    </article>
-                }
+                    </div>
+                    <div className="sort-options">
+                        <h3>
+                            <i class="bi bi-sort-down-alt me-2"></i> Sort By
+                        </h3>
+                        <p>Price</p>
+                    </div>
+                </article>
             </div>
             <main className={styles["main"]}>
                 <div className={`${styles["product-container"]}`}>
