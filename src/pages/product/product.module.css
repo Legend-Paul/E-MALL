@@ -50,3 +50,46 @@
 .bottom {
     max-width: 30rem;
 }
+
+.similar-products-container {
+    margin-top: 2rem;
+
+    h5 {
+        font-size: 1.125rem;
+    }
+    .similar-products {
+        margin-top: 1rem;
+        display: flex;
+        gap: 1.5rem;
+        .product {
+            place-items: center;
+            background-color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            transition: var(--transition-medium);
+            .product-image-container {
+                max-width: 6rem;
+                cursor: pointer;
+                img {
+                    width: 100%;
+                    aspect-ratio: 3/4;
+                }
+            }
+            .description {
+                width: 100%;
+                max-width: 8rem;
+                margin: 0 auto;
+                p {
+                    width: 100%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
+            &:hover {
+                transform: scale(1.05);
+                box-shadow: var(--shadow-md);
+            }
+        }
+    }
+}

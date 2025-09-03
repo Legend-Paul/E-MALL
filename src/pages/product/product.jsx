@@ -11,9 +11,7 @@ export async function Loader() {
 export default function Product() {
     const dataArray = useLoaderData();
     const { id } = useParams();
-    console.log(id);
     const data = dataArray[id - 1];
-    console.log(data);
     const similarData = dataArray.filter(
         (d) => d.category === data.category && d.id !== data.id
     );
@@ -50,6 +48,34 @@ export default function Product() {
                     <p>{data.description}</p>
                 </div>
             </article>
+            <div className={styles["similar-products-container"]}>
+                <h5>Similar Products</h5>
+                <div className={styles["similar-products"]}>
+                    {similarData.map((data) => {
+                        return (
+                            <div key={data.id} className={styles["product"]}>
+                                <div
+                                    className={
+                                        styles["product-image-container"]
+                                    }
+                                >
+                                    <Link>
+                                        <img
+                                            src={data.image}
+                                            alt={data.title}
+                                        />
+                                    </Link>
+                                </div>
+                                <div className={styles["description"]}>
+                                    <p className={styles["title"]}>
+                                        {data.title}
+                                    </p>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
         </section>
     );
 }
