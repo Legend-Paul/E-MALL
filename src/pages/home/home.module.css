@@ -69,7 +69,7 @@
         }
     }
 
-    .price-input > form {
+    .price-input {
         display: flex;
         gap: 1rem;
         flex-wrap: wrap;
@@ -100,11 +100,11 @@
     transition: var(--transition-slow);
     opacity: 0;
 
-    transform: scaleX(0);
+    transform: scaleZ(0);
 }
 .open-options {
     opacity: 1;
-    transform: scaleX(1);
+    transform: scaleZ(1);
     transition: var(--transition-slow);
 }
 .main {
@@ -154,13 +154,9 @@
             }
         }
     }
-    /* .change-z-index {
+    .change-z-index {
         z-index: 100;
-        &:hover {
-            transform: scale(1.05);
-            box-shadow: var(--shadow-md);
-        }
-    } */
+    }
     button {
         width: 100%;
         padding: 0.5rem 0;

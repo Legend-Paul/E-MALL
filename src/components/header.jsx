@@ -1,4 +1,4 @@
-import { NavLink, Outlet, Form } from "react-router-dom";
+import { NavLink, Outlet, Form, useLocation } from "react-router-dom";
 
 import styles from "./header.module.css";
 import Input from "./input";
@@ -15,6 +15,8 @@ export async function Action({ request }) {
 
 export default function Header() {
     const [toggleMenu, setToggleMenu] = useState(false);
+    const location = useLocation();
+    const homeSearchParams = location.state?.searchParams || "";
 
     function handleBurderClick() {
         setToggleMenu((state) => !state);
@@ -25,7 +27,7 @@ export default function Header() {
             <div className={styles["header-styles"]}>
                 <header>
                     <div className={styles["logo-search"]}>
-                        <NavLink to="/">
+                        <NavLink to={`/${homeSearchParams}`}>
                             <img
                                 src={logo}
                                 alt="Logo image with dark blue background"
@@ -51,7 +53,7 @@ export default function Header() {
                             <ul>
                                 <li className={styles["burger-md"]}>
                                     <NavLink
-                                        to="/"
+                                        to={`/${homeSearchParams}`}
                                         className={({ isActive }) =>
                                             isActive ? styles["active"] : ""
                                         }
@@ -155,7 +157,7 @@ export default function Header() {
                         <ul>
                             <li className={styles["burger-md"]}>
                                 <NavLink
-                                    to="/"
+                                    to={`/${homeSearchParams}`}
                                     className={({ isActive }) =>
                                         isActive ? styles["active"] : ""
                                     }

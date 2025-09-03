@@ -2,7 +2,7 @@ import styles from "./input.module.css";
 export default function Input({
     type,
     name,
-    value = null,
+    value = "",
     placehoder,
     labelName,
     required = true,

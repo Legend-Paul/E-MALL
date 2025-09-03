@@ -21,9 +21,15 @@ export async function Loader() {
 export default function Home() {
     // const priceFilter = useActionData
     const [searchParams, setSearchParams] = useSearchParams();
+    const filterOption = searchParams.get("filter-by");
+    const maxPriceFilter = searchParams.get("max-price");
+    const minPriceFilter = searchParams.get("min-price");
+
     const data = useLoaderData();
     const [isFilterOptionOpen, setIsFilterOptionOpen] = useState(false);
-    const [activeChip, setActiveChip] = useState("All");
+    const [activeChip, setActiveChip] = useState(
+        filterOption ? filterOption : "All"
+    );
 
     const filterOptions = [
         "All",
@@ -32,10 +38,6 @@ export default function Home() {
         "Electronics",
         "Jewelery",
     ];
-
-    const filterOption = searchParams.get("filter-category");
-    const maxPriceFilter = searchParams.get("max-price");
-    const minPriceFilter = searchParams.get("min-price");
 
     let filteredData = filterOption
         ? data.filter(
@@ -48,8 +50,7 @@ export default function Home() {
             ? getFilterPriceRange(filteredData, minPriceFilter, maxPriceFilter)
             : filteredData;
     function handleFilterSetting(filterName, type, value) {
-        console.log(value);
-        type === "filter-category" ? setActiveChip(filterName) : null;
+        type === "filter-by" ? setActiveChip(filterName) : null;
         setSearchParams((prevParam) => {
             if (!value) {
                 prevParam.delete(type);
@@ -91,7 +92,7 @@ export default function Home() {
                             </h3>
 
                             <div
-                                className={`${styles["filter-category"]} ${styles["option"]}`}
+                                className={`${styles["filter-by"]} ${styles["option"]}`}
                             >
                                 <h4>Options</h4>
                                 <div className={styles["filter-chips"]}>
@@ -109,7 +110,7 @@ export default function Home() {
                                                 handleFilterSetting(
                                                     category,
 
-                                                    "filter-category",
+                                                    "filter-by",
                                                     category === "All"
                                                         ? null
                                                         : category
@@ -127,35 +128,38 @@ export default function Home() {
                             >
                                 <h4>Price</h4>
                                 <div className={styles["price-input"]}>
-                                    <Form>
-                                        <Input
-                                            labelName={"Min"}
-                                            placehoder={"Min Price"}
-                                            type={"number"}
-                                            name={"min"}
-                                            handleOnchange={(e) =>
-                                                handleFilterSetting(
-                                                    null,
-                                                    "min-price",
-                                                    Number(e.target.value)
-                                                )
-                                            }
-                                        />
-                                        <Input
-                                            labelName={"Max"}
-                                            placehoder={"Max Price"}
-                                            type={"number"}
-                                            name={"max"}
-                                            handleOnchange={(e) =>
-                                                handleFilterSetting(
-                                                    null,
-                                                    "max-price",
-                                                    Number(e.target.value)
-                                                )
-                                            }
-                                        />
-                                        <Button label="Save Option" />
-                                    </Form>
+                                    <Input
+                                        labelName={"Min"}
+                                        placehoder={"Min Price"}
+                                        type={"number"}
+                                        value={
+                                            minPriceFilter ? minPriceFilter : ""
+                                        }
+                                        name={"min"}
+                                        handleOnchange={(e) =>
+                                            handleFilterSetting(
+                                                null,
+                                                "min-price",
+                                                Number(e.target.value)
+                                            )
+                                        }
+                                    />
+                                    <Input
+                                        labelName={"Max"}
+                                        placehoder={"Max Price"}
+                                        type={"number"}
+                                        value={
+                                            maxPriceFilter ? maxPriceFilter : ""
+                                        }
+                                        name={"max"}
+                                        handleOnchange={(e) =>
+                                            handleFilterSetting(
+                                                null,
+                                                "max-price",
+                                                Number(e.target.value)
+                                            )
+                                        }
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -185,7 +189,12 @@ export default function Home() {
                                         styles["product-image-container"]
                                     }
                                 >
-                                    <Link to={`/${data.id}`}>
+                                    <Link
+                                        to={`/${data.id}`}
+                                        state={{
+                                            searchParams: `?${searchParams.toString()}`,
+                                        }}
+                                    >
                                         <img
                                             src={data.image}
                                             alt={data.title}

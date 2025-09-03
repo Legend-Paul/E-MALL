@@ -11,6 +11,7 @@ export async function Loader() {
 export default function Product() {
     const dataArray = useLoaderData();
     const { id } = useParams();
+
     const data = dataArray[id - 1];
     const similarData = dataArray.filter(
         (d) => d.category === data.category && d.id !== data.id
