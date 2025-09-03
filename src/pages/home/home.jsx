@@ -24,7 +24,6 @@ export default function Home() {
     const data = useLoaderData();
     const [isFilterOptionOpen, setIsFilterOptionOpen] = useState(false);
     const [activeChip, setActiveChip] = useState("All");
-    const [filterPrice, setFilterPrice] = useState({ min: 0, max: 0 });
 
     const filterOptions = [
         "All",
@@ -33,9 +32,10 @@ export default function Home() {
         "Electronics",
         "Jewelery",
     ];
-    console.log(filterPrice);
 
     const filterOption = searchParams.get("filter-category");
+    const maxPriceFilter = searchParams.get("max-price");
+    const minPriceFilter = searchParams.get("min-price");
 
     let filteredData = filterOption
         ? data.filter(
@@ -44,16 +44,12 @@ export default function Home() {
         : data;
 
     filteredData =
-        filterPrice.min || filterPrice.max
-            ? getFilterPriceRange(
-                  filteredData,
-                  filterPrice.min,
-                  filterPrice.max
-              )
+        maxPriceFilter || minPriceFilter
+            ? getFilterPriceRange(filteredData, minPriceFilter, maxPriceFilter)
             : filteredData;
-    function handleChipClick(filterName, type, value) {
+    function handleFilterSetting(filterName, type, value) {
         console.log(value);
-        setActiveChip(filterName);
+        type === "filter-category" ? setActiveChip(filterName) : null;
         setSearchParams((prevParam) => {
             if (!value) {
                 prevParam.delete(type);
@@ -63,9 +59,7 @@ export default function Home() {
             return prevParam;
         });
     }
-    function handledPriceChange(type, value) {
-        setFilterPrice((prev) => ({ ...prev, [type]: value }));
-    }
+
     return (
         <section className={`${indexStyles["page"]} ${styles["home-page"]}`}>
             <div className={styles["user-options-cont"]}>
@@ -112,11 +106,13 @@ export default function Home() {
                                                 ]
                                             }`}
                                             onClick={() =>
-                                                handleChipClick(
+                                                handleFilterSetting(
                                                     category,
 
                                                     "filter-category",
-                                                    category
+                                                    category === "All"
+                                                        ? null
+                                                        : category
                                                 )
                                             }
                                         >
@@ -138,9 +134,10 @@ export default function Home() {
                                             type={"number"}
                                             name={"min"}
                                             handleOnchange={(e) =>
-                                                handledPriceChange(
-                                                    "min",
-                                                    e.target.value
+                                                handleFilterSetting(
+                                                    null,
+                                                    "min-price",
+                                                    Number(e.target.value)
                                                 )
                                             }
                                         />
@@ -150,9 +147,10 @@ export default function Home() {
                                             type={"number"}
                                             name={"max"}
                                             handleOnchange={(e) =>
-                                                handledPriceChange(
-                                                    "max",
-                                                    e.target.value
+                                                handleFilterSetting(
+                                                    null,
+                                                    "max-price",
+                                                    Number(e.target.value)
                                                 )
                                             }
                                         />

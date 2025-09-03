@@ -2,6 +2,7 @@ import styles from "./input.module.css";
 export default function Input({
     type,
     name,
+    value = null,
     placehoder,
     labelName,
     required = true,
@@ -13,6 +14,7 @@ export default function Input({
             <input
                 type={type}
                 name={name}
+                value={value}
                 placeholder={placehoder}
                 min={1}
                 minLength={type === "password" ? 8 : 0}
