@@ -4,7 +4,15 @@
     max-width: var(--container-width);
     padding: 1.5rem;
 }
-
+.product-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+.product-info {
+    background-color: var(--color-surface);
+    padding: 1rem;
+    border-radius: var(--radius-md);
+}
 .top {
     display: flex;
     gap: 1.5rem;
@@ -51,9 +59,51 @@
     max-width: 30rem;
 }
 
+.delivery-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 17rem;
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    background-color: var(--color-surface);
+    justify-self: end;
+    p {
+        font-size: 0.85rem;
+        border-bottom: 1px solid var(--color-border);
+    }
+    .delivery-location-selection {
+        display: grid;
+        gap: 0.5rem;
+        select {
+            max-width: 5rem;
+            height: 1.5rem;
+            option {
+                width: 100%;
+            }
+        }
+    }
+    .delivery-option {
+        display: grid;
+        gap: 1.5rem;
+        h5 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        p {
+            padding-left: 1.35rem;
+            span {
+                font-weight: 600;
+            }
+        }
+    }
+}
+
 .similar-products-container {
     margin-top: 2rem;
-
+    background-color: var(--color-surface);
+    border-radius: var(--radius-md);
+    padding: 1rem;
     h5 {
         font-size: 1.125rem;
     }

@@ -18,36 +18,82 @@ export default function Product() {
 
     return (
         <section className={styles["product-section"]}>
-            <div className={styles["top"]}>
-                <div className={styles["image-container"]}>
-                    <img src={data.image} alt={data.title} />
-                </div>
-                <div className={styles["small-description"]}>
-                    <div>
-                        <p className={styles["title"]}>{data.title}</p>
-                        <Link to={"#"}>Similar {data.category}</Link>
-                        <h3 className={styles["price"]}>{data.price}</h3>
-                        <div className={styles["product-quantity"]}>
-                            <span className={styles["subtract"]}>
-                                <i class="bi bi-dash-square-fill"></i>
-                            </span>
-                            <span className={styles["amount"]}>0</span>
-                            <span className={styles["add"]}>
-                                <i class="bi bi-plus-square-fill"></i>
-                            </span>
+            <div className={styles["product-summary"]}>
+                <div className={styles["product-info"]}>
+                    <div className={styles["top"]}>
+                        <div className={styles["image-container"]}>
+                            <img src={data.image} alt={data.title} />
+                        </div>
+                        <div className={styles["small-description"]}>
+                            <div>
+                                <p className={styles["title"]}>{data.title}</p>
+                                <Link to={"#"}>Similar {data.category}</Link>
+                                <h3 className={styles["price"]}>
+                                    {data.price}
+                                </h3>
+                                <div className={styles["product-quantity"]}>
+                                    <span className={styles["subtract"]}>
+                                        <i className="bi bi-dash-square-fill"></i>
+                                    </span>
+                                    <span className={styles["amount"]}>0</span>
+                                    <span className={styles["add"]}>
+                                        <i className="bi bi-plus-square-fill"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div className={styles["c-t-a"]}>
+                                <Button label="Add to cart" color="secondary" />
+                            </div>
                         </div>
                     </div>
-                    <div className={styles["c-t-a"]}>
-                        <Button label="Add to cart" color="secondary" />
+                    <article className={styles["bottom"]}>
+                        <div className={styles["total-description"]}>
+                            <h4>Product description</h4>
+                            <p>{data.description}</p>
+                        </div>
+                    </article>
+                </div>
+                <article className={styles["delivery-details"]}>
+                    <div className={styles["delivery-location-selection"]}>
+                        <h4>E-MALL PRODUCT DLIVERY</h4>
+                        <p>We provide delivery in the location below</p>
+                        <select name="delivery-options" id="">
+                            <option value="Nairobi">Nairobi</option>
+                            <option value="Nyeri">Nyeri</option>
+                            <option value="Mombasa">Mombasa</option>
+                            <option value="Thika">Thika</option>
+                            <option value="Nakuru">Nakuru</option>
+                            <option value="Kisumu">Kisumu</option>
+                            <option value="Eldoret">Eldoret</option>
+                        </select>
                     </div>
-                </div>
+                    <div className={styles["delivery-option"]}>
+                        <div className={styles["pick-up"]}>
+                            <h5>
+                                {" "}
+                                <i className="bi bi-handbag"></i> Pickup Station
+                            </h5>
+                            <p>
+                                Delivery Fees <span>KSh 90 Ready</span> for
+                                pickup after 4 days if you place your order
+                                within the next 6hrs 51mins
+                            </p>
+                        </div>
+                        <div className={styles["pick-up"]}>
+                            <h5>
+                                <i className="bi bi-truck"></i> Door to Door
+                                Delivery
+                            </h5>
+                            <p>
+                                Delivery Fees <span>KSh 200</span> Ready for
+                                delivery after 4 days if you place your order
+                                within the next 6hrs 51mins
+                            </p>
+                        </div>
+                    </div>
+                </article>
             </div>
-            <article className={styles["bottom"]}>
-                <div className={styles["total-description"]}>
-                    <h4>Product description</h4>
-                    <p>{data.description}</p>
-                </div>
-            </article>
+
             <div className={styles["similar-products-container"]}>
                 <h5>Similar Products</h5>
                 <div className={styles["similar-products"]}>
@@ -59,7 +105,7 @@ export default function Product() {
                                         styles["product-image-container"]
                                     }
                                 >
-                                    <Link>
+                                    <Link to={`/${data.id}`}>
                                         <img
                                             src={data.image}
                                             alt={data.title}
