@@ -3,7 +3,14 @@ import styles from "./home.module.css";
 import Button from "../../components/button";
 import Input from "../../components/input";
 import { useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import {
+    Form,
+    Link,
+    // useActionData,
+    useLoaderData,
+    useSearchParams,
+} from "react-router-dom";
+import getFilterPriceRange from "../../utils/filterPrice";
 
 export async function Loader() {
     const response = await fetch("https://fakestoreapi.com/products");
@@ -12,33 +19,52 @@ export async function Loader() {
 }
 
 export default function Home() {
+    // const priceFilter = useActionData
+    const [searchParams, setSearchParams] = useSearchParams();
     const data = useLoaderData();
     const [isFilterOptionOpen, setIsFilterOptionOpen] = useState(false);
-    const [activeChip, setActiveChip] = useState({
-        category: [
-            { name: "All", active: true },
-            { name: "TV", active: false },
-            { name: "Phones", active: false },
-            { name: "Laptop", active: false },
-            { name: "HeadPhones", active: false },
-        ],
+    const [activeChip, setActiveChip] = useState("All");
+    const [filterPrice, setFilterPrice] = useState({ min: 0, max: 0 });
 
-        brand: [
-            { name: "Techno", active: false },
-            { name: "RedMi", active: false },
-            { name: "Apple", active: false },
-            { name: "Techno", active: false },
-            { name: "Samsung", active: false },
-        ],
-    });
+    const filterOptions = [
+        "All",
+        "Men's clothing",
+        "Women's clothing",
+        "Electronics",
+        "Jewelery",
+    ];
+    console.log(filterPrice);
 
-    function handleChipClick(filterType, index) {
-        setActiveChip((prev) => ({
-            ...prev,
-            [filterType]: prev[filterType].map((chip, i) =>
-                i == index ? { ...chip, active: !chip.active } : { ...chip }
-            ),
-        }));
+    const filterOption = searchParams.get("filter-category");
+
+    let filteredData = filterOption
+        ? data.filter(
+              (dataObj) => dataObj.category === filterOption.toLocaleLowerCase()
+          )
+        : data;
+
+    filteredData =
+        filterPrice.min || filterPrice.max
+            ? getFilterPriceRange(
+                  filteredData,
+                  filterPrice.min,
+                  filterPrice.max
+              )
+            : filteredData;
+    function handleChipClick(filterName, type, value) {
+        console.log(value);
+        setActiveChip(filterName);
+        setSearchParams((prevParam) => {
+            if (!value) {
+                prevParam.delete(type);
+            } else {
+                prevParam.set(type, value);
+            }
+            return prevParam;
+        });
+    }
+    function handledPriceChange(type, value) {
+        setFilterPrice((prev) => ({ ...prev, [type]: value }));
     }
     return (
         <section className={`${indexStyles["page"]} ${styles["home-page"]}`}>
@@ -66,78 +92,85 @@ export default function Home() {
                         }`}
                     >
                         <div className={styles["filter-options"]}>
-                            <h4>Filter By</h4>
+                            <h3>
+                                <i className="bi bi-filter"></i> Filter By
+                            </h3>
 
                             <div
                                 className={`${styles["filter-category"]} ${styles["option"]}`}
                             >
-                                <h4>Category</h4>
+                                <h4>Options</h4>
                                 <div className={styles["filter-chips"]}>
-                                    {activeChip.category.map((category, i) => (
+                                    {filterOptions.map((category, i) => (
                                         <button
                                             key={i}
                                             className={`${styles["chip"]} ${
                                                 styles[
-                                                    category.active
+                                                    category === activeChip
                                                         ? "active"
                                                         : ""
                                                 ]
                                             }`}
                                             onClick={() =>
-                                                handleChipClick("category", i)
+                                                handleChipClick(
+                                                    category,
+
+                                                    "filter-category",
+                                                    category
+                                                )
                                             }
                                         >
-                                            {category.name}
+                                            {category}
                                         </button>
                                     ))}
                                 </div>
                             </div>
-                            <div
-                                className={`${styles["filter-brand"]} ${styles["option"]}`}
-                            >
-                                <h4>Brand</h4>
-                                <div className={styles["filter-chips"]}>
-                                    {activeChip.brand.map((brand, i) => (
-                                        <button
-                                            key={i}
-                                            className={`${styles["chip"]} ${
-                                                brand.active
-                                                    ? styles["active"]
-                                                    : styles[""]
-                                            }`}
-                                            onClick={() =>
-                                                handleChipClick("brand", i)
-                                            }
-                                        >
-                                            {brand.name}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
+
                             <div
                                 className={`${styles["filter-price"]} ${styles["option"]}`}
                             >
                                 <h4>Price</h4>
                                 <div className={styles["price-input"]}>
-                                    <Input
-                                        labelName={"Min"}
-                                        placehoder={"Min Price"}
-                                        type={"number"}
-                                    />
-                                    <Input
-                                        labelName={"Max"}
-                                        placehoder={"Max Price"}
-                                        type={"number"}
-                                    />
+                                    <Form>
+                                        <Input
+                                            labelName={"Min"}
+                                            placehoder={"Min Price"}
+                                            type={"number"}
+                                            name={"min"}
+                                            handleOnchange={(e) =>
+                                                handledPriceChange(
+                                                    "min",
+                                                    e.target.value
+                                                )
+                                            }
+                                        />
+                                        <Input
+                                            labelName={"Max"}
+                                            placehoder={"Max Price"}
+                                            type={"number"}
+                                            name={"max"}
+                                            handleOnchange={(e) =>
+                                                handledPriceChange(
+                                                    "max",
+                                                    e.target.value
+                                                )
+                                            }
+                                        />
+                                        <Button label="Save Option" />
+                                    </Form>
                                 </div>
                             </div>
+                        </div>
+                        <div className="sort-options">
+                            <h4>Sort By</h4>
+                            <p>Price</p>
                         </div>
                     </article>
                 }
             </div>
             <main className={styles["main"]}>
                 <div className={`${styles["product-container"]}`}>
-                    {data.map((data) => {
+                    {filteredData.map((data) => {
                         return (
                             <div
                                 key={data.id}

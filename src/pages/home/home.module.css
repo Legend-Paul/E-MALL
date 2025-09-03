@@ -69,9 +69,9 @@
         }
     }
 
-    .price-input {
+    .price-input > form {
         display: flex;
-        gap: 2rem;
+        gap: 1rem;
         flex-wrap: wrap;
         input {
             height: 2rem;
@@ -92,6 +92,10 @@
     gap: 1rem;
     padding-left: 1rem;
 }
+
+.user-options {
+    z-index: 10000;
+}
 .hide-options {
     transition: var(--transition-slow);
     opacity: 0;
@@ -102,7 +106,6 @@
     opacity: 1;
     transform: scaleX(1);
     transition: var(--transition-slow);
-    /* z-index: 500 !important; */
 }
 .main {
     margin-top: 5rem;
@@ -120,6 +123,10 @@
         place-content: center;
         padding: 0.5rem 1rem;
         transition: var(--transition-medium);
+        &:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-md);
+        }
 
         .product-image-container {
             max-width: 10rem;
@@ -146,22 +153,25 @@
                 font-size: 1.5rem;
             }
         }
+    }
+    /* .change-z-index {
+        z-index: 100;
         &:hover {
             transform: scale(1.05);
             box-shadow: var(--shadow-md);
         }
-    }
-    .change-z-index {
-        z-index: 100;
-    }
+    } */
     button {
         width: 100%;
         padding: 0.5rem 0;
         margin-bottom: 0.5rem;
-        opacity: 0;
-        transition: var(--radius-md);
+        border-radius: var(--radius-lg);
+        /* opacity: 0; */
+        /* display: none; */
+        /* transition: var(--radius-md); */
     }
 }
 .product:hover > button {
     opacity: 1;
+    display: inline;
 }

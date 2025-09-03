@@ -5,6 +5,7 @@ export default function Input({
     placehoder,
     labelName,
     required = true,
+    handleOnchange = () => null,
 }) {
     return (
         <label className={styles["label"]}>
@@ -16,6 +17,7 @@ export default function Input({
                 min={1}
                 minLength={type === "password" ? 8 : 0}
                 required={required}
+                onChange={handleOnchange}
             />
         </label>
     );
