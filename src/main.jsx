@@ -20,6 +20,7 @@ import Account from "./pages/account/account";
 import ForgotPassword, {
     Action as forgotPassworAction,
 } from "./pages/account/forgot-password";
+import Product, { Loader as productLoader } from "./pages/product/product";
 
 const routes = createBrowserRouter(
     createRoutesFromElements(
@@ -31,6 +32,11 @@ const routes = createBrowserRouter(
                     element={<Home />}
                     action={headerAction}
                     loader={homeLoader}
+                />
+                <Route
+                    path="/:id"
+                    element={<Product />}
+                    loader={productLoader}
                 />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />

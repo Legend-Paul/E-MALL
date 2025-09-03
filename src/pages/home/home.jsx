@@ -3,7 +3,7 @@ import styles from "./home.module.css";
 import Button from "../../components/button";
 import Input from "../../components/input";
 import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 export async function Loader() {
     const response = await fetch("https://fakestoreapi.com/products");
@@ -40,9 +40,6 @@ export default function Home() {
             ),
         }));
     }
-    const firstData = data[0];
-    console.log(firstData);
-
     return (
         <section className={`${indexStyles["page"]} ${styles["home-page"]}`}>
             <div className={styles["user-options-cont"]}>
@@ -157,7 +154,12 @@ export default function Home() {
                                         styles["product-image-container"]
                                     }
                                 >
-                                    <img src={data.image} alt="" />
+                                    <Link to={`/${data.id}`}>
+                                        <img
+                                            src={data.image}
+                                            alt={data.title}
+                                        />
+                                    </Link>
                                 </div>
                                 <div className={styles["description"]}>
                                     <p className={styles["title"]}>

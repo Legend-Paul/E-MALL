@@ -3,9 +3,10 @@
     --color-primary: #0056ff; /* Main brand color (blue tone for tech feel) */
     --color-primary-light: #e6efff;
     --color-primary-dark: #003bb5;
-    --color-background-dark: #222b36;
+    --color-background-dark: hsl(213, 23%, 17%);
 
     --color-secondary: #ff6f00; /* Highlight/accent (for deals/offers) */
+    --color-secondary--hover: #f06b06; /* Highlight/accent (for deals/offers) */
     --color-accent: #00d1b2; /* CTA color (buy now, add to cart, etc.) */
 
     --color-background: #f9f9f9;
