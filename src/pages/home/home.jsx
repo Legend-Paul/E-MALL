@@ -273,7 +273,7 @@ export default function Home() {
             </div>
             <main className={styles["main"]}>
                 <div className={`${styles["product-container"]}`}>
-                    {filteredData.map((data, i) => {
+                    {filteredData.map((data) => {
                         return (
                             <div
                                 key={data.id}

@@ -26,7 +26,6 @@ export default function Product() {
     const [location, setLocation] = useState(
         prevProduct?.location || "Nairobi"
     );
-
     const similarData = dataArray.filter(
         (d) => d.category === data.category && d.id !== data.id
     );
@@ -39,7 +38,8 @@ export default function Product() {
     }
 
     function handleAddToCart() {
-        console.log(amount, location);
+        if (amount === 0) setAmount(1);
+
         hanldeAddProductToCart(id, amount, location);
     }
     function handeLocationChange(e) {
