@@ -35,7 +35,6 @@ export async function Action({ request }) {
         : delete errors.emailExist;
 
     if (Object.keys(errors).length > 0) return errors;
-    console.log(users);
     const allUsers = users || [];
     allUsers.push(user);
     localStorage.setItem("users", JSON.stringify(allUsers));

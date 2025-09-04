@@ -19,8 +19,7 @@ export async function Action({ request }) {
             (user) => user.email === email && user.details.password === password
         );
     !user && users ? (error.name = "Inalid email or password") : user;
-    console.log(users);
-    console.log(error);
+
     if (Object.keys(error).length > 0) return error;
 
     if (users) {

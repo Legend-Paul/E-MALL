@@ -1,22 +1,50 @@
 import { Link, useLoaderData, useParams } from "react-router-dom";
 import Button from "../../components/button";
 import styles from "./product.module.css";
+import hanldeAddProductToCart from "../../utils/addProductToLocalStorage";
+import { useState } from "react";
 
 export async function Loader() {
     const response = await fetch(`https://fakestoreapi.com/products`);
     const data = await response.json();
     return data;
 }
+function CheckPrevProductAmount(id, products) {
+    if (!products) return null;
+    let product = products.find((data) => data.id == id);
+    return product ? product : null;
+}
 
 export default function Product() {
     const dataArray = useLoaderData();
     const { id } = useParams();
-
+    const products = JSON.parse(localStorage.getItem("cart-products"));
     const data = dataArray[id - 1];
+    // localStorage.removeItem("cart-products");
+    const prevProduct = CheckPrevProductAmount(id, products);
+    const [amount, setAmount] = useState(prevProduct?.value?.amount || 0);
+    const [location, setLocation] = useState(
+        prevProduct?.location || "Nairobi"
+    );
+
     const similarData = dataArray.filter(
         (d) => d.category === data.category && d.id !== data.id
     );
 
+    function handleAddAmount() {
+        setAmount((amount) => amount + 1);
+    }
+    function handleSubtractAmount() {
+        setAmount((amount) => (amount ? amount - 1 : amount));
+    }
+
+    function handleAddToCart() {
+        console.log(amount, location);
+        hanldeAddProductToCart(id, amount, location);
+    }
+    function handeLocationChange(e) {
+        setLocation(e.target.value);
+    }
     return (
         <section className={styles["product-section"]}>
             <div className={styles["product-summary"]}>
@@ -30,20 +58,32 @@ export default function Product() {
                                 <p className={styles["title"]}>{data.title}</p>
                                 <Link to={"#"}>Similar {data.category}</Link>
                                 <h3 className={styles["price"]}>
-                                    {data.price}
+                                    Ksh {data.price}
                                 </h3>
                                 <div className={styles["product-quantity"]}>
-                                    <span className={styles["subtract"]}>
+                                    <span
+                                        className={styles["subtract"]}
+                                        onClick={() => handleSubtractAmount()}
+                                    >
                                         <i className="bi bi-dash-square-fill"></i>
                                     </span>
-                                    <span className={styles["amount"]}>0</span>
-                                    <span className={styles["add"]}>
+                                    <span className={styles["amount"]}>
+                                        {amount}
+                                    </span>
+                                    <span
+                                        className={styles["add"]}
+                                        onClick={() => handleAddAmount()}
+                                    >
                                         <i className="bi bi-plus-square-fill"></i>
                                     </span>
                                 </div>
                             </div>
                             <div className={styles["c-t-a"]}>
-                                <Button label="Add to cart" color="secondary" />
+                                <Button
+                                    label="Add to cart"
+                                    color="secondary"
+                                    handleClick={handleAddToCart}
+                                />
                             </div>
                         </div>
                     </div>
@@ -58,7 +98,12 @@ export default function Product() {
                     <div className={styles["delivery-location-selection"]}>
                         <h4>E-MALL PRODUCT DLIVERY</h4>
                         <p>We provide delivery in the location below</p>
-                        <select name="delivery-options" id="">
+                        <select
+                            name="delivery-options"
+                            id=""
+                            value={location}
+                            onChange={handeLocationChange}
+                        >
                             <option value="Nairobi">Nairobi</option>
                             <option value="Nyeri">Nyeri</option>
                             <option value="Mombasa">Mombasa</option>

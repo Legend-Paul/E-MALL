@@ -12,6 +12,7 @@ import {
 } from "react-router-dom";
 import getFilterPriceRange from "../../utils/filterPrice";
 import getSortProductOption from "../../utils/sortProduct";
+import hanldeAddProductToCart from "../../utils/addProductToLocalStorage";
 
 export async function Loader() {
     const response = await fetch("https://fakestoreapi.com/products");
@@ -39,7 +40,7 @@ export default function Home() {
     const [activeSortingOrder, setActiveSortingOrder] = useState(
         sortOrderOption ? sortOrderOption : null
     );
-    console.log(sortOption);
+
     const filterOptions = [
         "All",
         "Men's clothing",
@@ -59,7 +60,7 @@ export default function Home() {
         maxPriceFilter || minPriceFilter
             ? getFilterPriceRange(filteredData, minPriceFilter, maxPriceFilter)
             : filteredData;
-    console.log(sortOption, sortOrderOption);
+
     filteredData =
         sortOption || sortOrderOption
             ? getSortProductOption(filteredData, sortOption, sortOrderOption)
@@ -272,7 +273,7 @@ export default function Home() {
             </div>
             <main className={styles["main"]}>
                 <div className={`${styles["product-container"]}`}>
-                    {filteredData.map((data) => {
+                    {filteredData.map((data, i) => {
                         return (
                             <div
                                 key={data.id}
@@ -309,7 +310,13 @@ export default function Home() {
                                         Ksh. {data.price}
                                     </h3>
                                 </div>
-                                <Button label="Add to cart" color="secondary" />
+                                <Button
+                                    label="Add to cart"
+                                    color="secondary"
+                                    handleClick={() =>
+                                        hanldeAddProductToCart(data.id)
+                                    }
+                                />
                             </div>
                         );
                     })}
