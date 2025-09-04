@@ -1,4 +1,4 @@
-import { Link, useLoaderData, useParams } from "react-router-dom";
+import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/button";
 import styles from "./product.module.css";
 import hanldeAddProductToCart from "../../utils/addProductToLocalStorage";
@@ -20,12 +20,14 @@ export default function Product() {
     const { id } = useParams();
     const products = JSON.parse(localStorage.getItem("cart-products"));
     const data = dataArray[id - 1];
+    const navigate = useNavigate();
     // localStorage.removeItem("cart-products");
     const prevProduct = CheckPrevProductAmount(id, products);
     const [amount, setAmount] = useState(prevProduct?.value?.amount || 0);
     const [location, setLocation] = useState(
         prevProduct?.location || "Nairobi"
     );
+
     const similarData = dataArray.filter(
         (d) => d.category === data.category && d.id !== data.id
     );
@@ -45,8 +47,18 @@ export default function Product() {
     function handeLocationChange(e) {
         setLocation(e.target.value);
     }
+    function handleNavigateToHomePage() {
+        navigate(-1);
+    }
+
     return (
         <section className={styles["product-section"]}>
+            <button
+                onClick={handleNavigateToHomePage}
+                className={styles["move-back-btn"]}
+            >
+                <i className="bi bi-arrow-left"></i> Move back to home page
+            </button>
             <div className={styles["product-summary"]}>
                 <div className={styles["product-info"]}>
                     <div className={styles["top"]}>

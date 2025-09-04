@@ -21,8 +21,8 @@ export async function Action({ request }) {
 
 export default function Header() {
     const [toggleMenu, setToggleMenu] = useState(false);
-    const location = useLocation();
     const [searchParams] = useSearchParams();
+    const location = useLocation();
 
     const homeSearchParams = location.state?.searchParams || "";
 
