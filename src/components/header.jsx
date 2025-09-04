@@ -1,4 +1,10 @@
-import { NavLink, Outlet, Form, useLocation } from "react-router-dom";
+import {
+    NavLink,
+    Outlet,
+    Form,
+    useLocation,
+    useSearchParams,
+} from "react-router-dom";
 
 import styles from "./header.module.css";
 import Input from "./input";
@@ -16,6 +22,8 @@ export async function Action({ request }) {
 export default function Header() {
     const [toggleMenu, setToggleMenu] = useState(false);
     const location = useLocation();
+    const [searchParams] = useSearchParams();
+
     const homeSearchParams = location.state?.searchParams || "";
 
     function handleBurderClick() {
@@ -27,7 +35,12 @@ export default function Header() {
             <div className={styles["header-styles"]}>
                 <header>
                     <div className={styles["logo-search"]}>
-                        <NavLink to={`/${homeSearchParams}`}>
+                        <NavLink
+                            to={`/${homeSearchParams}`}
+                            state={{
+                                searchParams: `?${searchParams.toString()}`,
+                            }}
+                        >
                             <img
                                 src={logo}
                                 alt="Logo image with dark blue background"
@@ -68,6 +81,9 @@ export default function Header() {
                                         className={({ isActive }) =>
                                             isActive ? styles["active"] : ""
                                         }
+                                        state={{
+                                            searchParams: `?${searchParams.toString()}`,
+                                        }}
                                     >
                                         {" "}
                                         <i className="bi bi-info-circle-fill me-2"></i>
@@ -80,6 +96,9 @@ export default function Header() {
                                         className={({ isActive }) =>
                                             isActive ? styles["active"] : ""
                                         }
+                                        state={{
+                                            searchParams: `?${searchParams.toString()}`,
+                                        }}
                                     >
                                         <i className="bi bi-envelope-fill me-2"></i>
                                         <p>Contact</p>
@@ -92,6 +111,9 @@ export default function Header() {
                                         className={({ isActive }) =>
                                             isActive ? styles["active"] : ""
                                         }
+                                        state={{
+                                            searchParams: `?${searchParams.toString()}`,
+                                        }}
                                     >
                                         {" "}
                                         <i className="bi bi-box-seam-fill me-2"></i>
@@ -116,6 +138,9 @@ export default function Header() {
                                         className={({ isActive }) =>
                                             isActive ? styles["active"] : ""
                                         }
+                                        state={{
+                                            searchParams: `?${searchParams.toString()}`,
+                                        }}
                                     >
                                         <i className="bi bi-person-circle me-2"></i>{" "}
                                         <p>Account</p>
@@ -127,6 +152,9 @@ export default function Header() {
                                         className={({ isActive }) =>
                                             isActive ? styles["active"] : ""
                                         }
+                                        state={{
+                                            searchParams: `?${searchParams.toString()}`,
+                                        }}
                                     >
                                         <i className="bi bi-cart-fill me-2"></i>
                                         <p>Cart</p>
@@ -161,6 +189,9 @@ export default function Header() {
                                     className={({ isActive }) =>
                                         isActive ? styles["active"] : ""
                                     }
+                                    state={{
+                                        searchParams: `?${searchParams.toString()}`,
+                                    }}
                                 >
                                     <i className="bi bi-house-fill me-2"></i>
                                     <p>Home</p>
@@ -172,6 +203,9 @@ export default function Header() {
                                     className={({ isActive }) =>
                                         isActive ? styles["active"] : ""
                                     }
+                                    state={{
+                                        searchParams: `?${searchParams.toString()}`,
+                                    }}
                                 >
                                     <i className="bi bi-info-circle-fill me-2"></i>
                                     <p>About</p>
@@ -183,6 +217,9 @@ export default function Header() {
                                     className={({ isActive }) =>
                                         isActive ? styles["active"] : ""
                                     }
+                                    state={{
+                                        searchParams: `?${searchParams.toString()}`,
+                                    }}
                                 >
                                     <i className="bi bi-envelope-fill me-2"></i>
                                     <p>Contact</p>
@@ -194,6 +231,9 @@ export default function Header() {
                                     className={({ isActive }) =>
                                         isActive ? styles["active"] : ""
                                     }
+                                    state={{
+                                        searchParams: `?${searchParams.toString()}`,
+                                    }}
                                 >
                                     <i className="bi bi-box-seam-fill me-2"></i>
                                     <p>Orders</p>
@@ -205,6 +245,9 @@ export default function Header() {
                                     className={({ isActive }) =>
                                         isActive ? styles["active"] : ""
                                     }
+                                    state={{
+                                        searchParams: `?${searchParams.toString()}`,
+                                    }}
                                 >
                                     <i className="bi bi-person-circle me-2"></i>
                                     <p>Account</p>
@@ -216,6 +259,9 @@ export default function Header() {
                                     className={({ isActive }) =>
                                         isActive ? styles["active"] : ""
                                     }
+                                    state={{
+                                        searchParams: `?${searchParams.toString()}`,
+                                    }}
                                 >
                                     <i className="bi bi-heart-fill"></i>
                                     <p>Liked</p>

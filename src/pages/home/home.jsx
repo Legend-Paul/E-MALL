@@ -24,13 +24,21 @@ export default function Home() {
     const filterOption = searchParams.get("filter-by");
     const maxPriceFilter = searchParams.get("max-price");
     const minPriceFilter = searchParams.get("min-price");
+    const sortOption = searchParams.get("sort");
+    const sortOrderOption = searchParams.get("order");
 
     const data = useLoaderData();
     const [isFilterOptionOpen, setIsFilterOptionOpen] = useState(false);
     const [activeChip, setActiveChip] = useState(
-        filterOption ? filterOption : "All"
+        filterOption ? filterOption : "all"
     );
-
+    const [activeSortingChip, setActiveSortingChip] = useState(
+        sortOption ? sortOption : null
+    );
+    const [activeSortingOrder, setActiveSortingOrder] = useState(
+        sortOrderOption ? sortOrderOption : null
+    );
+    console.log(sortOption);
     const filterOptions = [
         "All",
         "Men's clothing",
@@ -38,6 +46,7 @@ export default function Home() {
         "Electronics",
         "Jewelery",
     ];
+    const sortOptions = ["Name", "Price"];
 
     let filteredData = filterOption
         ? data.filter(
@@ -49,14 +58,40 @@ export default function Home() {
         maxPriceFilter || minPriceFilter
             ? getFilterPriceRange(filteredData, minPriceFilter, maxPriceFilter)
             : filteredData;
+
     function handleFilterSetting(filterName, type, value) {
         type === "filter-by" ? setActiveChip(filterName) : null;
         setSearchParams((prevParam) => {
             if (!value) {
                 prevParam.delete(type);
             } else {
-                prevParam.set(type, value);
+                prevParam.set(type, value.toLocaleLowerCase());
             }
+            return prevParam;
+        });
+    }
+
+    function handleSortSetting(sortName) {
+        setActiveSortingChip(sortName);
+        setActiveSortingOrder((prev) => (prev ? prev : "ascending"));
+        setSearchParams((prevParam) => {
+            prevParam.set("sort", sortName.toLocaleLowerCase());
+            return prevParam;
+        });
+    }
+    function handleSorOrdertSetting(orderName) {
+        setActiveSortingOrder(orderName);
+        setSearchParams((prevParam) => {
+            prevParam.set("order", orderName);
+            return prevParam;
+        });
+    }
+    function handleClearSort() {
+        setSearchParams((prevParam) => {
+            prevParam.delete("sort");
+            prevParam.delete("order");
+            setActiveSortingChip(null);
+            setActiveSortingOrder(null);
             return prevParam;
         });
     }
@@ -87,7 +122,7 @@ export default function Home() {
                 >
                     <div className={styles["filter-options"]}>
                         <h3>
-                            <i class="bi bi-funnel-fill me-2"></i> Filter By
+                            <i className="bi bi-funnel-fill me-2"></i> Filter By
                         </h3>
 
                         <div
@@ -100,19 +135,20 @@ export default function Home() {
                                         key={i}
                                         className={`${styles["chip"]} ${
                                             styles[
-                                                category === activeChip
+                                                category.toLowerCase() ===
+                                                activeChip
                                                     ? "active"
                                                     : ""
                                             ]
                                         }`}
                                         onClick={() =>
                                             handleFilterSetting(
-                                                category,
+                                                category.toLowerCase(),
 
                                                 "filter-by",
                                                 category === "All"
                                                     ? null
-                                                    : category
+                                                    : category.toLowerCase()
                                             )
                                         }
                                     >
@@ -158,11 +194,72 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
-                    <div className="sort-options">
+                    <div className={styles["sort-options"]}>
                         <h3>
-                            <i class="bi bi-sort-down-alt me-2"></i> Sort By
+                            <i className="bi bi-sort-down-alt me-2"></i> Sort By
                         </h3>
-                        <p>Price</p>
+                        <div className={styles["sort-option-order-container"]}>
+                            <div className={styles["sort-chips"]}>
+                                {sortOptions.map((option, i) => (
+                                    <button
+                                        className={`${styles["chip"]} ${
+                                            styles[
+                                                option.toLocaleLowerCase() ===
+                                                activeSortingChip
+                                                    ? "active"
+                                                    : ""
+                                            ]
+                                        }`}
+                                        key={i}
+                                        onClick={() =>
+                                            handleSortSetting(option)
+                                        }
+                                    >
+                                        {option}
+                                    </button>
+                                ))}
+                            </div>
+                            <div className={styles["sort-order"]}>
+                                <div
+                                    className={`${styles["ascending"]} ${
+                                        styles[
+                                            activeSortingOrder === "ascending"
+                                                ? "active"
+                                                : ""
+                                        ]
+                                    }`}
+                                    onClick={() =>
+                                        handleSorOrdertSetting("ascending")
+                                    }
+                                >
+                                    <i className="bi bi-sort-up"></i>
+                                    Ascending
+                                </div>
+                                <div
+                                    className={`${styles["descending"]} ${
+                                        styles[
+                                            activeSortingOrder === "descending"
+                                                ? "active"
+                                                : ""
+                                        ]
+                                    }`}
+                                    onClick={() =>
+                                        handleSorOrdertSetting("descending")
+                                    }
+                                >
+                                    {" "}
+                                    <i className="bi bi-sort-down"></i>
+                                    Descending
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles["clear-sort"]}>
+                            <Button
+                                label="Clear Sort"
+                                color="error"
+                                handleClick={handleClearSort}
+                            />
+                        </div>
                     </div>
                 </article>
             </div>

@@ -32,17 +32,18 @@
     padding: 1.5rem 1rem;
     box-shadow: var(--shadow-lg);
     border-radius: var(--radius-lg);
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border: 1px solid var(--color-primary);
     position: relative;
     left: 0;
     z-index: 50;
 }
 
-.filter-options {
+.filter-options,
+.sort-options {
     display: grid;
     gap: 1rem;
-    .filter-chips {
+    .filter-chips,
+    .sort-chips {
         display: flex;
         gap: 1rem;
         flex-wrap: wrap;
@@ -81,6 +82,32 @@
             max-width: 10rem;
             justify-self: start;
         }
+    }
+}
+
+.sort-option-order-container {
+    display: flex;
+    gap: 2rem;
+    .sort-chips {
+        display: grid;
+        margin-bottom: 0;
+    }
+    .sort-order {
+        display: grid;
+        gap: 1rem;
+    }
+}
+.sort-order {
+    div {
+        cursor: pointer;
+    }
+    div.active {
+        border-bottom: 2px solid var(--color-secondary);
+    }
+}
+.clear-sort {
+    button {
+        padding: 0.25rem 0.75rem;
     }
 }
 
