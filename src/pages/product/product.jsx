@@ -56,7 +56,11 @@ export default function Product() {
                         <div className={styles["small-description"]}>
                             <div>
                                 <p className={styles["title"]}>{data.title}</p>
-                                <Link to={"#"}>Similar {data.category}</Link>
+                                <Link
+                                    to={`/?filter-by=${data.category.toLowerCase()}`}
+                                >
+                                    Similar {data.category}
+                                </Link>
                                 <h3 className={styles["price"]}>
                                     Ksh {data.price}
                                 </h3>
