@@ -11,6 +11,7 @@ import {
     useSearchParams,
 } from "react-router-dom";
 import getFilterPriceRange from "../../utils/filterPrice";
+import getSortProductOption from "../../utils/sortProduct";
 
 export async function Loader() {
     const response = await fetch("https://fakestoreapi.com/products");
@@ -58,7 +59,11 @@ export default function Home() {
         maxPriceFilter || minPriceFilter
             ? getFilterPriceRange(filteredData, minPriceFilter, maxPriceFilter)
             : filteredData;
-
+    console.log(sortOption, sortOrderOption);
+    filteredData =
+        sortOption || sortOrderOption
+            ? getSortProductOption(filteredData, sortOption, sortOrderOption)
+            : filteredData;
     function handleFilterSetting(filterName, type, value) {
         type === "filter-by" ? setActiveChip(filterName) : null;
         setSearchParams((prevParam) => {
@@ -73,7 +78,7 @@ export default function Home() {
 
     function handleSortSetting(sortName) {
         setActiveSortingChip(sortName);
-        setActiveSortingOrder((prev) => (prev ? prev : "ascending"));
+
         setSearchParams((prevParam) => {
             prevParam.set("sort", sortName.toLocaleLowerCase());
             return prevParam;
@@ -212,7 +217,9 @@ export default function Home() {
                                         }`}
                                         key={i}
                                         onClick={() =>
-                                            handleSortSetting(option)
+                                            handleSortSetting(
+                                                option.toLocaleLowerCase()
+                                            )
                                         }
                                     >
                                         {option}
