@@ -57,7 +57,7 @@ export default function Product() {
                 onClick={handleNavigateToHomePage}
                 className={styles["move-back-btn"]}
             >
-                <i className="bi bi-arrow-left"></i> Move back to home page
+                <i className="bi bi-arrow-left"></i> Move back
             </button>
             <div className={styles["product-summary"]}>
                 <div className={styles["product-info"]}>

@@ -21,6 +21,7 @@ import ForgotPassword, {
     Action as forgotPassworAction,
 } from "./pages/account/forgot-password";
 import Product, { Loader as productLoader } from "./pages/product/product";
+import Cart, { Loader as cartLoader } from "./pages/cart/cart";
 
 const routes = createBrowserRouter(
     createRoutesFromElements(
@@ -58,6 +59,7 @@ const routes = createBrowserRouter(
                         action={forgotPassworAction}
                     />
                 </Route>
+                <Route path="/cart" element={<Cart />} loader={cartLoader} />
             </Route>
         </>
     )

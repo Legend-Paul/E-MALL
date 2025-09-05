@@ -12,7 +12,6 @@ import Button from "./button";
 import { useEffect, useState } from "react";
 import logo from "../assets/images/logo.png";
 import Footer from "./footer";
-import { current } from "immer";
 
 export async function Action({ request }) {
     const data = await request.formData();
@@ -28,12 +27,12 @@ function calculateProductsAmount(products) {
 export default function Header() {
     const [toggleMenu, setToggleMenu] = useState(false);
     const [searchParams] = useSearchParams();
-    const location = useLocation();
     const products = JSON.parse(localStorage.getItem("cart-products"));
     const [cartAmount, setCartAmount] = useState(
         calculateProductsAmount(products)
     );
-    console.log(calculateProductsAmount(products));
+    const location = useLocation();
+
     const homeSearchParams = location.state?.searchParams || "";
 
     useEffect(() => {

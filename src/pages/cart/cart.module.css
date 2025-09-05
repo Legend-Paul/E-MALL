@@ -1,0 +1,43 @@
+section {
+    margin-top: 8rem;
+    padding: 0 1.5rem;
+}
+.no-product-container {
+    display: grid;
+    place-items: center;
+    height: 15rem;
+    max-width: 1000px;
+    margin: auto;
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-md);
+}
+
+article {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-lg);
+    display: grid;
+    gap: 1.5rem;
+    border-radius: var(--radius-md);
+    .images {
+        display: flex;
+        gap: 1.5rem;
+        a {
+            max-width: 6rem;
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            transition: var(--transition-medium);
+            img {
+                width: 100%;
+                aspect-ratio: 3/4;
+            }
+            &:hover {
+                transform: scale(1.1);
+                box-shadow: var(--shadow-md);
+            }
+        }
+    }
+}
