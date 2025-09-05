@@ -9,22 +9,58 @@ import {
 import styles from "./header.module.css";
 import Input from "./input";
 import Button from "./button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../assets/images/logo.png";
 import Footer from "./footer";
+import { current } from "immer";
 
 export async function Action({ request }) {
     const data = await request.formData();
     console.log(data.get("search"));
     return null;
 }
+function calculateProductsAmount(products) {
+    return products
+        ? products.reduce((acc, curr) => acc + curr.value.amount, 0)
+        : 0;
+}
 
 export default function Header() {
     const [toggleMenu, setToggleMenu] = useState(false);
     const [searchParams] = useSearchParams();
     const location = useLocation();
-
+    const products = JSON.parse(localStorage.getItem("cart-products"));
+    const [cartAmount, setCartAmount] = useState(
+        calculateProductsAmount(products)
+    );
+    console.log(calculateProductsAmount(products));
     const homeSearchParams = location.state?.searchParams || "";
+
+    useEffect(() => {
+        function handleStorageChange() {
+            const updatedProducts = JSON.parse(
+                localStorage.getItem("cart-products")
+            );
+            setCartAmount(
+                updatedProducts
+                    ? updatedProducts.reduce(
+                          (acc, curr) => acc + curr.value.amount,
+                          0
+                      )
+                    : 0
+            );
+        }
+
+        window.addEventListener("storage", handleStorageChange);
+        const interval = setInterval(handleStorageChange, 1000);
+
+        handleStorageChange();
+
+        return () => {
+            window.removeEventListener("storage", handleStorageChange);
+            clearInterval(interval);
+        };
+    }, [products]);
 
     function handleBurderClick() {
         setToggleMenu((state) => !state);
@@ -146,7 +182,7 @@ export default function Header() {
                                         <p>Account</p>
                                     </NavLink>
                                 </li>
-                                <li>
+                                <li className={styles["cart"]}>
                                     <NavLink
                                         to="/cart"
                                         className={({ isActive }) =>
@@ -158,6 +194,9 @@ export default function Header() {
                                     >
                                         <i className="bi bi-cart-fill me-2"></i>
                                         <p>Cart</p>
+                                        <p className={styles["cart-amount"]}>
+                                            {cartAmount}
+                                        </p>
                                     </NavLink>
                                 </li>
                                 <li

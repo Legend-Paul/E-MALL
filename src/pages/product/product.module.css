@@ -21,6 +21,7 @@
     padding: 1rem;
     border-radius: var(--radius-md);
 }
+
 .top {
     display: flex;
     gap: 1.5rem;

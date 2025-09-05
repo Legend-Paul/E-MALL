@@ -123,7 +123,7 @@
                 button {
                     width: 2.6rem;
                     cursor: pointer;
-                    height: 2.72rem;
+                    height: 2.75rem;
                     border-radius: var(--radius-md);
                     background-color: var(--color-surface);
                     border: 2px solid var(--color-text-muted);
@@ -137,6 +137,18 @@
                 }
             }
         }
+    }
+}
+.cart {
+    position: relative;
+    .cart-amount {
+        position: absolute;
+        top: 0;
+        right: 0.25rem;
+        font-size: 1.125rem;
+        background-color: var(--color-secondary);
+        padding: 0.15rem;
+        border-radius: var(--radius-md);
     }
 }
 
