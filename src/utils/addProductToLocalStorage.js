@@ -1,14 +1,22 @@
 import { produce } from "immer";
 
-export default function hanldeAddProductToCart(id, amount, location) {
+export default function hanldeAddProductToCart(data, amount, location) {
     const products = JSON.parse(localStorage.getItem("cart-products")) || [];
-    let newProduct = { id, value: { amount: 1, location: null } };
+    let newProduct = {
+        id: data.id,
+        value: {
+            amount: 1,
+            image: data.image,
+            title: data.title,
+            location: null,
+        },
+    };
     if (products.length < 1) products.push(newProduct);
     else {
-        let product = products.find((data) => data.id == id);
+        let product = products.find((d) => d.id == data.id);
 
-        const index = products.findIndex((data) => {
-            return data.id == id;
+        const index = products.findIndex((d) => {
+            return d.id == data.id;
         });
         product = product
             ? inreaseProductAmount(product, amount, location)
@@ -30,7 +38,7 @@ function inreaseProductAmount(product, amount, location) {
         });
     if (location)
         updatedProduct = produce(updatedProduct, (draft) => {
-            draft.location = location;
+            draft.value.location = location;
         });
 
     return updatedProduct;

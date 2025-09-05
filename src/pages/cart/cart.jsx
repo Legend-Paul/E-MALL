@@ -21,6 +21,11 @@ export default function Cart() {
     const homeSearchParams = location.state?.searchParams || "";
     const limit = Math.floor((Math.random() * data.length) / 1.25);
     const articleData = data.filter((data, i) => i < limit + 5 && i > limit);
+    const products = JSON.parse(localStorage.getItem("cart-products"));
+    const productAmont = products?.reduce(
+        (acc, curr) => acc + curr?.value?.amount,
+        0
+    );
 
     function handleNavigateToHomePage() {
         navigate(`/${homeSearchParams}`);
@@ -28,26 +33,35 @@ export default function Cart() {
 
     return (
         <section>
-            <div className={styles["no-product-container"]}>
-                <em>You have not added anything yet!</em>
-                <Button
-                    label="Go back to shopping"
-                    color="secondary"
-                    handleClick={handleNavigateToHomePage}
-                />
-            </div>
-            <article>
-                <h4>Product you may like</h4>
-                <div className={styles["images"]}>
-                    {articleData.map((data) => {
-                        return (
-                            <Link to={`/${data.id}`}>
-                                <img src={data.image} alt={data.title} />
-                            </Link>
-                        );
-                    })}
+            {products ? (
+                <></>
+            ) : (
+                <div>
+                    <div className={styles["no-product-container"]}>
+                        <em>You have not added anything yet!</em>
+                        <Button
+                            label="Go back to shopping"
+                            color="secondary"
+                            handleClick={handleNavigateToHomePage}
+                        />
+                    </div>
+                    <article>
+                        <h4>Product you may like</h4>
+                        <div className={styles["images"]}>
+                            {articleData.map((data) => {
+                                return (
+                                    <Link to={`/${data.id}`}>
+                                        <img
+                                            src={data.image}
+                                            alt={data.title}
+                                        />
+                                    </Link>
+                                );
+                            })}
+                        </div>
+                    </article>
                 </div>
-            </article>
+            )}{" "}
         </section>
     );
 }

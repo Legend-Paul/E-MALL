@@ -314,7 +314,7 @@ export default function Home() {
                                     label="Add to cart"
                                     color="secondary"
                                     handleClick={() =>
-                                        hanldeAddProductToCart(data.id)
+                                        hanldeAddProductToCart(data)
                                     }
                                 />
                             </div>
