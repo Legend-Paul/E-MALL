@@ -6,6 +6,8 @@ import {
 } from "react-router-dom";
 import Button from "../../components/button";
 import styles from "./cart.module.css";
+import { handleDeleteProductFromCart } from "../../utils/addProductToLocalStorage";
+import { useState } from "react";
 
 export async function Loader() {
     const response = await fetch(`https://fakestoreapi.com/products`);
@@ -17,6 +19,7 @@ export default function Cart() {
     const data = useLoaderData();
     const navigate = useNavigate();
     const location = useLocation();
+    const [click, setclick] = useState(false);
 
     const homeSearchParams = location.state?.searchParams || "";
     const limit = Math.floor((Math.random() * data.length) / 1.25);
@@ -31,10 +34,74 @@ export default function Cart() {
         navigate(`/${homeSearchParams}`);
     }
 
+    function handleDeleteProduct(data) {
+        setclick(!click);
+        handleDeleteProductFromCart(data);
+    }
+    function handleAddAmount() {}
+    function handleSubtractAmount() {}
+    // localStorage.removeItesm("cart-products");
+
     return (
         <section>
             {products ? (
-                <></>
+                <div className={styles["products-container"]}>
+                    <h1>Cart Quantity ({productAmont})</h1>
+                    {[...products].map((data) => {
+                        return (
+                            <div className={styles["product"]} key={data.id}>
+                                <div className={styles["image-side"]}>
+                                    <div className={styles["image-container"]}>
+                                        <img
+                                            src={data.value.image}
+                                            alt={data.value.title}
+                                        />
+                                    </div>
+                                    <div className="description">
+                                        <h4>{data.value.title}</h4>
+                                        <em>Few units left here at E-Mall</em>
+                                    </div>
+                                </div>
+                                <div className={styles["price-side"]}>
+                                    <h3 className={styles["price"]}>
+                                        {data.value.price || 1000}
+                                    </h3>
+                                    <div className={styles["product-quantity"]}>
+                                        <span
+                                            className={styles["subtract"]}
+                                            onClick={() =>
+                                                handleSubtractAmount()
+                                            }
+                                        >
+                                            <i className="bi bi-dash-square-fill"></i>
+                                        </span>
+                                        <span className={styles["amount"]}>
+                                            {data?.value.amount}
+                                        </span>
+                                        <span
+                                            className={styles["add"]}
+                                            onClick={() => handleAddAmount()}
+                                        >
+                                            <i className="bi bi-plus-square-fill"></i>
+                                        </span>
+                                    </div>
+                                    <Button
+                                        label={
+                                            <>
+                                                Delete{" "}
+                                                <i className="bi bi-trash3-fill"></i>
+                                            </>
+                                        }
+                                        color="error"
+                                        handleClick={() =>
+                                            handleDeleteProduct(data)
+                                        }
+                                    />
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
             ) : (
                 <div>
                     <div className={styles["no-product-container"]}>
@@ -45,23 +112,25 @@ export default function Cart() {
                             handleClick={handleNavigateToHomePage}
                         />
                     </div>
-                    <article>
-                        <h4>Product you may like</h4>
-                        <div className={styles["images"]}>
-                            {articleData.map((data) => {
-                                return (
-                                    <Link to={`/${data.id}`}>
-                                        <img
-                                            src={data.image}
-                                            alt={data.title}
-                                        />
-                                    </Link>
-                                );
-                            })}
-                        </div>
-                    </article>
                 </div>
             )}{" "}
+            <article>
+                <h4>Product you may like</h4>
+                <div className={styles["images"]}>
+                    {articleData.map((data) => {
+                        return (
+                            <div
+                                key={data.id}
+                                className={styles["images-container"]}
+                            >
+                                <Link to={`/${data.id}`}>
+                                    <img src={data.image} alt={data.title} />
+                                </Link>
+                            </div>
+                        );
+                    })}
+                </div>
+            </article>
         </section>
     );
 }

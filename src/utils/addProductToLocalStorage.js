@@ -5,9 +5,10 @@ export default function hanldeAddProductToCart(data, amount, location) {
     let newProduct = {
         id: data.id,
         value: {
-            amount: 1,
+            amount: amount ? amount : 1,
             image: data.image,
             title: data.title,
+            price: data.price,
             location: null,
         },
     };
@@ -42,4 +43,16 @@ function inreaseProductAmount(product, amount, location) {
         });
 
     return updatedProduct;
+}
+
+export function handleDeleteProductFromCart(data) {
+    const products = JSON.parse(localStorage.getItem("cart-products")) || [];
+    const index = products.findIndex((d) => {
+        return d.id == data.id;
+    });
+
+    products.splice(index, 1);
+    products.length > 0
+        ? localStorage.setItem("cart-products", JSON.stringify(products))
+        : localStorage.removeItesm("cart-products");
 }

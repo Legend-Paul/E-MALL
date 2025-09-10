@@ -23,7 +23,9 @@ export default function Product() {
     const navigate = useNavigate();
     // localStorage.removeItem("cart-products");
     const prevProduct = CheckPrevProductAmount(id, products);
-    const [amount, setAmount] = useState(prevProduct?.value?.amount || 0);
+    const [productAmount, setProductAmount] = useState(
+        prevProduct?.value?.amount || 0
+    );
     const [location, setLocation] = useState(
         prevProduct?.location || "Nairobi"
     );
@@ -34,16 +36,19 @@ export default function Product() {
     );
 
     function handleAddAmount() {
-        setAmount((amount) => amount + 1);
+        setProductAmount((amount) => amount + 1);
     }
     function handleSubtractAmount() {
-        setAmount((amount) => (amount ? amount - 1 : amount));
+        setProductAmount((amount) => amount - 1);
+    }
+    function handleClearAmount() {
+        setProductAmount(0);
     }
 
     function handleAddToCart() {
-        if (amount === 0) setAmount(1);
+        if (productAmount.amount === 0) setProductAmount(1);
 
-        hanldeAddProductToCart(data, amount, location);
+        hanldeAddProductToCart(data, productAmount, location);
     }
     function handeLocationChange(e) {
         setLocation(e.target.value);
@@ -85,7 +90,7 @@ export default function Product() {
                                         <i className="bi bi-dash-square-fill"></i>
                                     </span>
                                     <span className={styles["amount"]}>
-                                        {amount}
+                                        {productAmount}
                                     </span>
                                     <span
                                         className={styles["add"]}
@@ -162,7 +167,11 @@ export default function Product() {
                 <div className={styles["similar-products"]}>
                     {similarData.map((data) => {
                         return (
-                            <div key={data.id} className={styles["product"]}>
+                            <div
+                                key={data.id}
+                                className={styles["product"]}
+                                onClick={handleClearAmount}
+                            >
                                 <div
                                     className={
                                         styles["product-image-container"]
