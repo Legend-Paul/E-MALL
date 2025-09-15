@@ -8,6 +8,7 @@ import Button from "../../components/button";
 import styles from "./cart.module.css";
 import { handleDeleteProductFromCart } from "../../utils/addProductToLocalStorage";
 import { useState } from "react";
+import hanldeAddProductToCart from "../../utils/addProductToLocalStorage";
 
 export async function Loader() {
     const response = await fetch(`https://fakestoreapi.com/products`);
@@ -20,12 +21,13 @@ export default function Cart() {
     const navigate = useNavigate();
     const location = useLocation();
     const [click, setclick] = useState(false);
-
     const homeSearchParams = location.state?.searchParams || "";
     const limit = Math.floor((Math.random() * data.length) / 1.25);
     const articleData = data.filter((data, i) => i < limit + 5 && i > limit);
     const products = JSON.parse(localStorage.getItem("cart-products"));
-    const productAmont = products?.reduce(
+    console.log(products);
+
+    const productQuantity = products?.reduce(
         (acc, curr) => acc + curr?.value?.amount,
         0
     );
@@ -38,15 +40,24 @@ export default function Cart() {
         setclick(!click);
         handleDeleteProductFromCart(data);
     }
-    function handleAddAmount() {}
-    function handleSubtractAmount() {}
-    // localStorage.removeItesm("cart-products");
+
+    function handleAddAmount(id, amount) {
+        hanldeAddProductToCart(data[id - 1], amount + 1);
+        setclick(!click);
+    }
+    function handleSubtractAmount(id, amount) {
+        amount - 1 < 1
+            ? handleDeleteProductFromCart(data)
+            : hanldeAddProductToCart(data[id - 1], amount - 1);
+        setclick(!click);
+    }
+    // localStorage.removeItem("cart-products");
 
     return (
         <section>
             {products ? (
                 <div className={styles["products-container"]}>
-                    <h1>Cart Quantity ({productAmont})</h1>
+                    <h1>Cart Quantity ({productQuantity})</h1>
                     {[...products].map((data) => {
                         return (
                             <div className={styles["product"]} key={data.id}>
@@ -70,7 +81,10 @@ export default function Cart() {
                                         <span
                                             className={styles["subtract"]}
                                             onClick={() =>
-                                                handleSubtractAmount()
+                                                handleSubtractAmount(
+                                                    data.id,
+                                                    data?.value.amount
+                                                )
                                             }
                                         >
                                             <i className="bi bi-dash-square-fill"></i>
@@ -80,7 +94,12 @@ export default function Cart() {
                                         </span>
                                         <span
                                             className={styles["add"]}
-                                            onClick={() => handleAddAmount()}
+                                            onClick={() =>
+                                                handleAddAmount(
+                                                    data.id,
+                                                    data?.value.amount
+                                                )
+                                            }
                                         >
                                             <i className="bi bi-plus-square-fill"></i>
                                         </span>
