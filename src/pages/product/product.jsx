@@ -29,8 +29,6 @@ export default function Product() {
     const [location, setLocation] = useState(
         prevProduct?.location || "Nairobi"
     );
-    console.log(products);
-
     const similarData = dataArray.filter(
         (d) => d.category === data.category && d.id !== data.id
     );
@@ -46,10 +44,10 @@ export default function Product() {
     }
 
     function handleAddToCart() {
-        if (productAmount.amount === 0) setProductAmount(1);
-
+        if (productAmount === 0) setProductAmount(1);
         hanldeAddProductToCart(data, productAmount, location);
     }
+
     function handeLocationChange(e) {
         setLocation(e.target.value);
     }
@@ -85,7 +83,7 @@ export default function Product() {
                                 <div className={styles["product-quantity"]}>
                                     <span
                                         className={styles["subtract"]}
-                                        onClick={() => handleSubtractAmount()}
+                                        onClick={handleSubtractAmount}
                                     >
                                         <i className="bi bi-dash-square-fill"></i>
                                     </span>
@@ -94,7 +92,7 @@ export default function Product() {
                                     </span>
                                     <span
                                         className={styles["add"]}
-                                        onClick={() => handleAddAmount()}
+                                        onClick={handleAddAmount}
                                     >
                                         <i className="bi bi-plus-square-fill"></i>
                                     </span>
