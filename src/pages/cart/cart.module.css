@@ -22,10 +22,13 @@ section {
         border-top: 2px solid var(--color-text-muted);
         padding-top: 1.5rem;
         display: flex;
-        width: 100%;
+        justify-content: space-between;
+        min-height: 8rem;
+
         gap: 2rem;
         .image-side {
             display: flex;
+            flex-grow: 1;
             align-items: center;
             h4 {
                 margin-bottom: 1rem;
@@ -35,7 +38,7 @@ section {
             }
             gap: 1.5rem;
             .image-container {
-                max-width: 6rem;
+                width: 6rem;
 
                 img {
                     width: 100%;
@@ -45,7 +48,6 @@ section {
         }
         .price-side {
             display: grid;
-            width: 100%;
             justify-self: end;
             .product-quantity {
                 justify-self: end;
@@ -137,6 +139,20 @@ article {
             &:hover {
                 transform: scale(1.1);
                 box-shadow: var(--shadow-md);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 684px) {
+    .products-content {
+        flex-direction: column;
+        .price-side {
+            .price {
+                font-size: 1.5rem !important;
+            }
+            span {
+                font-size: 1.26rem !important;
             }
         }
     }

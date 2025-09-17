@@ -65,7 +65,7 @@
     }
 }
 .bottom {
-    max-width: 30rem;
+    box-shadow: none;
 }
 
 .delivery-details {
