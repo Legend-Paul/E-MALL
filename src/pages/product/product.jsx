@@ -30,7 +30,7 @@ export default function Product() {
         prevProduct?.location || "Nairobi"
     );
     const similarData = dataArray.filter(
-        (d) => d.category === data.category && d.id !== data.id
+        (d) => d?.category === data?.category && d?.id !== data?.id
     );
 
     function handleAddAmount() {

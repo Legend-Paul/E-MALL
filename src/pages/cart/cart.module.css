@@ -144,7 +144,7 @@ article {
     }
 }
 
-@media screen and (max-width: 684px) {
+@media screen and (max-width: 695px) {
     .products-content {
         flex-direction: column;
         .price-side {

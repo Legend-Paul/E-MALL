@@ -1,10 +1,11 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import styles from "./checkout.module.css";
 import { calculateTotalPrice } from "../../utils/addProductToLocalStorage";
 import Button from "../../components/button";
 import { useState } from "react";
 export default function CheckOut() {
     const [deliverOption, setDeliveryOPtion] = useState("station");
+    const navigate = useNavigate();
     const products = JSON.parse(localStorage.getItem("cart-products"));
     const users = JSON.parse(localStorage.getItem("users"));
     let signedUser = null;
@@ -23,8 +24,16 @@ export default function CheckOut() {
             DELIVERPRICE[deliverOption] * productQuantity + totalPrice;
         return Number(total.toFixed(2));
     }
-    console.log(signedUser);
-    // localStorage.clear();s
+    function handleNavigateToOrdersPage() {
+        const ordersProduct =
+            JSON.parse(localStorage.getItem("orders-products")) || [];
+        localStorage.setItem(
+            "orders-products",
+            JSON.stringify([...ordersProduct, ...products])
+        );
+        localStorage.removeItem("cart-products");
+        navigate("/orders");
+    }
     return (
         <section>
             {signedUser ? (
@@ -138,7 +147,11 @@ export default function CheckOut() {
                                     </div>
                                 </div>
 
-                                <Button label="Order Now" color="secondary" />
+                                <Button
+                                    label="Order Now"
+                                    color="secondary"
+                                    handleClick={handleNavigateToOrdersPage}
+                                />
                             </div>
                         </div>
                     </div>

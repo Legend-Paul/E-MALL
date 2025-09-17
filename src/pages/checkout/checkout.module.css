@@ -102,8 +102,10 @@
         }
         button {
             margin: 0 1.5rem;
-            padding: 0.5rem 2.5rem;
+            padding: 0.75rem 2.5rem;
             border: none;
+            place-self: center;
+            width: 100%;
         }
     }
 }
