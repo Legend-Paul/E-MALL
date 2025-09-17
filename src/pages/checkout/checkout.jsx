@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import styles from "./checkout.module.css";
-import Input from "../../components/input";
 import { calculateTotalPrice } from "../../utils/addProductToLocalStorage";
 import Button from "../../components/button";
 import { useState } from "react";
@@ -24,109 +23,130 @@ export default function CheckOut() {
             DELIVERPRICE[deliverOption] * productQuantity + totalPrice;
         return Number(total.toFixed(2));
     }
-
+    console.log(signedUser);
+    // localStorage.clear();s
     return (
         <section>
-            {products && (
-                <div className={styles["order-content"]}>
-                    <div className={styles["products-container"]}>
-                        {[...products].map((data) => {
-                            return (
-                                <div
-                                    className={styles["product"]}
-                                    key={data.id}
-                                >
-                                    <p className={styles["product-amount"]}>
-                                        {data.value.amount}
-                                    </p>
-                                    <div className={styles["heading"]}>
-                                        <div className={styles["pickup"]}>
-                                            <p>PCKUP STATION</p>
-                                            <p>{data?.value?.location}</p>
+            {signedUser ? (
+                products ? (
+                    <div className={styles["order-content"]}>
+                        <div className={styles["products-container"]}>
+                            {[...products].map((data) => {
+                                return (
+                                    <div
+                                        className={styles["product"]}
+                                        key={data.id}
+                                    >
+                                        <p className={styles["product-amount"]}>
+                                            {data.value.amount}
+                                        </p>
+                                        <div className={styles["heading"]}>
+                                            <div className={styles["pickup"]}>
+                                                <p>PCKUP STATION</p>
+                                                <p>{data?.value?.location}</p>
+                                            </div>
+                                            <Link to={`/${data.id}`}>
+                                                Change
+                                            </Link>
                                         </div>
-                                        <Link to={`/${data.id}`}>Change</Link>
-                                    </div>
-                                    <div className={styles["product-content"]}>
                                         <div
                                             className={
-                                                styles["image-container"]
+                                                styles["product-content"]
                                             }
                                         >
-                                            <img
-                                                src={data.value.image}
-                                                alt={data.value.title}
-                                            />
-                                        </div>
-                                        <div className={styles["description"]}>
-                                            <h4>{data.value.title}</h4>
-                                            <p>Ksh {data.value.price}</p>
+                                            <div
+                                                className={
+                                                    styles["image-container"]
+                                                }
+                                            >
+                                                <img
+                                                    src={data.value.image}
+                                                    alt={data.value.title}
+                                                />
+                                            </div>
+                                            <div
+                                                className={
+                                                    styles["description"]
+                                                }
+                                            >
+                                                <h4>{data.value.title}</h4>
+                                                <p>Ksh {data.value.price}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                    <div className={styles["custormer-options"]}>
-                        <div className={styles["personal-details"]}>
-                            <p className={styles["name"]}>
-                                HELLO{" "}
-                                {signedUser?.details?.username.toUpperCase()}
-                            </p>
-
-                            <p className={styles["email"]}>
-                                Email | {signedUser?.email}
-                            </p>
+                                );
+                            })}
                         </div>
-                        <div className={styles["order-details"]}>
-                            <h3>Order({productQuantity})</h3>
-                            <div className={styles["delivery-option"]}>
-                                <h4>Delivery option @ product</h4>
-                                <label>
-                                    <input
-                                        type="radio"
-                                        name="delivery-option"
-                                        defaultChecked
-                                        onChange={() =>
-                                            handleChangeDeliveryOption(
-                                                "station"
-                                            )
-                                        }
-                                    />
-                                    <p>
-                                        Pickup Station (Ksh
-                                        DELIVERPRICE.station)
-                                    </p>
-                                </label>
-                                <label>
-                                    <input
-                                        type="radio"
-                                        name="delivery-option"
-                                        onChange={() =>
-                                            handleChangeDeliveryOption("door")
-                                        }
-                                    />
-                                    <p>Door to door (Ksh DELIVERPRICE.door)</p>
-                                </label>
-                            </div>
-                            <div className={styles["total-amount"]}>
-                                <div className={styles["amount"]}>
-                                    <p>Amount </p>
-                                    <p>{totalPrice}</p>
-                                </div>
-                                <div className={styles["delivery-fee"]}>
-                                    <p>Delivery </p>
-                                    <p>{DELIVERPRICE[deliverOption]}</p>
-                                </div>
-                                <div className={styles["delivery-fee"]}>
-                                    <p>Total Amount </p>
-                                    <p>{calculateTotalOrderAmount()}</p>
-                                </div>
-                            </div>
+                        <div className={styles["custormer-options"]}>
+                            <div className={styles["personal-details"]}>
+                                <p className={styles["name"]}>
+                                    HELLO{" "}
+                                    {signedUser?.details?.username.toUpperCase()}
+                                </p>
 
-                            <Button label="Order Now" color="secondary" />
+                                <p className={styles["email"]}>
+                                    Email | {signedUser?.email}
+                                </p>
+                            </div>
+                            <div className={styles["order-details"]}>
+                                <h3>Order({productQuantity})</h3>
+                                <div className={styles["delivery-option"]}>
+                                    <h4>Delivery option @ product</h4>
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            name="delivery-option"
+                                            defaultChecked
+                                            onChange={() =>
+                                                handleChangeDeliveryOption(
+                                                    "station"
+                                                )
+                                            }
+                                        />
+                                        <p>
+                                            Pickup Station (Ksh
+                                            DELIVERPRICE.station)
+                                        </p>
+                                    </label>
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            name="delivery-option"
+                                            onChange={() =>
+                                                handleChangeDeliveryOption(
+                                                    "door"
+                                                )
+                                            }
+                                        />
+                                        <p>
+                                            Door to door (Ksh DELIVERPRICE.door)
+                                        </p>
+                                    </label>
+                                </div>
+                                <div className={styles["total-amount"]}>
+                                    <div className={styles["amount"]}>
+                                        <p>Amount </p>
+                                        <p>{totalPrice}</p>
+                                    </div>
+                                    <div className={styles["delivery-fee"]}>
+                                        <p>Delivery </p>
+                                        <p>{DELIVERPRICE[deliverOption]}</p>
+                                    </div>
+                                    <div className={styles["delivery-fee"]}>
+                                        <p>Total Amount </p>
+                                        <p>{calculateTotalOrderAmount()}</p>
+                                    </div>
+                                </div>
+
+                                <Button label="Order Now" color="secondary" />
+                            </div>
                         </div>
                     </div>
-                </div>
+                ) : (
+                    <Navigate to="/cart" />
+                )
+            ) : (
+                <Navigate to="/account" />
             )}
         </section>
     );

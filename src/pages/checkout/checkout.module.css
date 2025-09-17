@@ -11,10 +11,12 @@
         box-shadow: var(--shadow-lg);
         border-radius: var(--radius-md);
         padding: 1.5rem;
+        display: inline-block;
         .product {
             border: 1px solid var(--color-text-muted);
             position: relative;
             border-radius: 0.5rem;
+            max-height: 15rem;
             .product-amount {
                 position: absolute;
                 background-color: var(--color-secondary);
