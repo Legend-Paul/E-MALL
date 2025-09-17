@@ -1,7 +1,10 @@
 import { produce } from "immer";
 
-export default function hanldeAddProductToCart(data, amount, location) {
-    console.log(data.id);
+export default function hanldeAddProductToCart(
+    data,
+    amount,
+    location = "Nairobi"
+) {
     const products = JSON.parse(localStorage.getItem("cart-products")) || [];
     let newProduct = {
         id: data.id,
@@ -16,7 +19,6 @@ export default function hanldeAddProductToCart(data, amount, location) {
     if (products.length < 1) products.push(newProduct);
     else {
         let product = products.find((d) => d.id == data.id);
-        console.log(product);
 
         const index = products.findIndex((d) => {
             return d.id == data.id;
@@ -34,7 +36,6 @@ export default function hanldeAddProductToCart(data, amount, location) {
 
 function inreaseProductAmount(product, amount, location) {
     let updatedProduct = { ...product };
-    console.log(updatedProduct);
 
     if (amount)
         updatedProduct = produce(updatedProduct, (draft) => {
@@ -58,4 +59,13 @@ export function handleDeleteProductFromCart(data) {
     products.length > 0
         ? localStorage.setItem("cart-products", JSON.stringify(products))
         : localStorage.removeItem("cart-products");
+}
+
+export function calculateTotalPrice(products) {
+    if (!products || !Array.isArray(products)) return 0;
+    return products.reduce(
+        (acc, curr) =>
+            acc + (curr?.value?.price || 0) * (curr?.value?.amount || 1),
+        0
+    );
 }
