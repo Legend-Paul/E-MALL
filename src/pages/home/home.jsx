@@ -1,7 +1,7 @@
 import indexStyles from "../../index.module.css";
 import styles from "./home.module.css";
 import Button from "../../components/button";
-import Input from "../../components/input";
+import { DynamicInput } from "../../components/input";
 import { useState } from "react";
 import {
     Form,
@@ -71,7 +71,10 @@ export default function Home() {
             if (!value) {
                 prevParam.delete(type);
             } else {
-                prevParam.set(type, value.toLocaleLowerCase());
+                prevParam.set(
+                    type,
+                    Number.isFinite(value) ? value : value.toLocaleLowerCase()
+                );
             }
             return prevParam;
         });
@@ -169,7 +172,7 @@ export default function Home() {
                         >
                             <h4>Price</h4>
                             <div className={styles["price-input"]}>
-                                <Input
+                                <DynamicInput
                                     labelName={"Min"}
                                     placehoder={"Min Price"}
                                     type={"number"}
@@ -183,7 +186,7 @@ export default function Home() {
                                         )
                                     }
                                 />
-                                <Input
+                                <DynamicInput
                                     labelName={"Max"}
                                     placehoder={"Max Price"}
                                     type={"number"}
