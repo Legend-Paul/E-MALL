@@ -2,19 +2,31 @@ import { Link } from "react-router-dom";
 import styles from "./checkout.module.css";
 import Input from "../../components/input";
 import { calculateTotalPrice } from "../../utils/addProductToLocalStorage";
+import Button from "../../components/button";
+import { useState } from "react";
 export default function CheckOut() {
+    const [deliverOption, setDeliveryOPtion] = useState("station");
     const products = JSON.parse(localStorage.getItem("cart-products"));
     const users = JSON.parse(localStorage.getItem("users"));
     let signedUser = null;
+    const DELIVERPRICE = { door: 200, station: 90 };
     if (users) signedUser = users.find((user) => user.isSignedIn);
     const productQuantity = products?.reduce(
         (acc, curr) => acc + curr?.value?.amount,
         0
     );
+    const totalPrice = calculateTotalPrice(products);
+    function handleChangeDeliveryOption(option) {
+        setDeliveryOPtion(option);
+    }
+    function calculateTotalOrderAmount() {
+        const total =
+            DELIVERPRICE[deliverOption] * productQuantity + totalPrice;
+        return Number(total.toFixed(2));
+    }
 
     return (
         <section>
-            <h2>Hello, {signedUser ? signedUser.details.username : ""}</h2>
             {products && (
                 <div className={styles["order-content"]}>
                     <div className={styles["products-container"]}>
@@ -24,6 +36,9 @@ export default function CheckOut() {
                                     className={styles["product"]}
                                     key={data.id}
                                 >
+                                    <p className={styles["product-amount"]}>
+                                        {data.value.amount}
+                                    </p>
                                     <div className={styles["heading"]}>
                                         <div className={styles["pickup"]}>
                                             <p>PCKUP STATION</p>
@@ -52,45 +67,63 @@ export default function CheckOut() {
                         })}
                     </div>
                     <div className={styles["custormer-options"]}>
-                        <div className="personal-details">
-                            <p className="name">
+                        <div className={styles["personal-details"]}>
+                            <p className={styles["name"]}>
                                 HELLO{" "}
                                 {signedUser?.details?.username.toUpperCase()}
                             </p>
-                            <p className="email">Email | {signedUser?.email}</p>
+
+                            <p className={styles["email"]}>
+                                Email | {signedUser?.email}
+                            </p>
                         </div>
-                        <div className="order-details">
+                        <div className={styles["order-details"]}>
                             <h3>Order({productQuantity})</h3>
-                            <div className="delivery-option">
+                            <div className={styles["delivery-option"]}>
                                 <h4>Delivery option @ product</h4>
                                 <label>
                                     <input
                                         type="radio"
                                         name="delivery-option"
                                         defaultChecked
+                                        onChange={() =>
+                                            handleChangeDeliveryOption(
+                                                "station"
+                                            )
+                                        }
                                     />
-                                    Pickup Station(Ksh 90)
+                                    <p>
+                                        Pickup Station (Ksh
+                                        DELIVERPRICE.station)
+                                    </p>
                                 </label>
                                 <label>
                                     <input
                                         type="radio"
                                         name="delivery-option"
+                                        onChange={() =>
+                                            handleChangeDeliveryOption("door")
+                                        }
                                     />
-                                    Door to door(Ksh 200)
+                                    <p>Door to door (Ksh DELIVERPRICE.door)</p>
                                 </label>
                             </div>
-                            <div className="total-amount">
-                                <div className="amount">
+                            <div className={styles["total-amount"]}>
+                                <div className={styles["amount"]}>
                                     <p>Amount </p>
-                                    <p>{calculateTotalPrice(products)}</p>
+                                    <p>{totalPrice}</p>
                                 </div>
-                            </div>
-                            <div className="deliverly-fee">
-                                <div className="amount">
+                                <div className={styles["delivery-fee"]}>
                                     <p>Delivery </p>
-                                    <p>{200 * products.length}</p>
+                                    <p>{DELIVERPRICE[deliverOption]}</p>
+                                </div>
+                                <div className={styles["delivery-fee"]}>
+                                    <p>Total Amount </p>
+                                    <p>{calculateTotalOrderAmount()}</p>
                                 </div>
                             </div>
+
+                            <Button label="Order Now" color="secondary" />
                         </div>
                     </div>
                 </div>

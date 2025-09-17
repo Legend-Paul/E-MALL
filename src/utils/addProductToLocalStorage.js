@@ -63,9 +63,10 @@ export function handleDeleteProductFromCart(data) {
 
 export function calculateTotalPrice(products) {
     if (!products || !Array.isArray(products)) return 0;
-    return products.reduce(
+    const total = products.reduce(
         (acc, curr) =>
             acc + (curr?.value?.price || 0) * (curr?.value?.amount || 1),
         0
     );
+    return Number(total.toFixed(2));
 }
