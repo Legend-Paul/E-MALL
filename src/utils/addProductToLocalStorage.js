@@ -13,7 +13,7 @@ export default function hanldeAddProductToCart(
             image: data.image,
             title: data.title,
             price: data.price,
-            location: null,
+            location: location,
         },
     };
     if (products.length < 1) products.push(newProduct);
@@ -31,6 +31,7 @@ export default function hanldeAddProductToCart(
             ? products.splice(index, 1, product)
             : products.push(product);
     }
+
     localStorage.setItem("cart-products", JSON.stringify(products));
 }
 

@@ -3,13 +3,7 @@ import styles from "./home.module.css";
 import Button from "../../components/button";
 import { DynamicInput } from "../../components/input";
 import { useState } from "react";
-import {
-    Form,
-    Link,
-    // useActionData,
-    useLoaderData,
-    useSearchParams,
-} from "react-router-dom";
+import { Link, useLoaderData, useSearchParams } from "react-router-dom";
 import getFilterPriceRange from "../../utils/filterPrice";
 import getSortProductOption from "../../utils/sortProduct";
 import hanldeAddProductToCart from "../../utils/addProductToLocalStorage";
@@ -21,7 +15,6 @@ export async function Loader() {
 }
 
 export default function Home() {
-    // const priceFilter = useActionData
     const [searchParams, setSearchParams] = useSearchParams();
     const filterOption = searchParams.get("filter-by");
     const maxPriceFilter = searchParams.get("max-price");
