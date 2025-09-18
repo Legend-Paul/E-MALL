@@ -53,6 +53,9 @@
                 h4 {
                     margin-bottom: 0.5rem;
                 }
+                p {
+                    color: var(--color-text-muted);
+                }
             }
         }
     }
@@ -100,12 +103,14 @@
                 justify-content: space-between;
             }
         }
-        button {
-            margin: 0 1.5rem;
-            padding: 0.75rem 2.5rem;
-            border: none;
-            place-self: center;
+        .btn-cont {
             width: 100%;
+
+            padding: 0.75rem 1.5rem;
+            border: none;
+            button {
+                width: 100% !important;
+            }
         }
     }
 }
@@ -114,4 +119,10 @@
     .order-content {
         flex-direction: column;
     }
+    /* .custormer-options {
+        button {
+            place-self: center;
+            width: 100% !important;
+        }
+    } */
 }

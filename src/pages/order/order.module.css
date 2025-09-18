@@ -21,6 +21,18 @@
                 font-size: 0.85rem;
                 color: var(--color-text-muted);
             }
+            .pedding,
+            .delivered {
+                font-size: 0.75rem;
+                padding: 0 0.5rem;
+                color: var(--color-surface);
+                border-radius: var(--radius-sm);
+                background-color: var(--color-error);
+                display: inline-block;
+            }
+            .delivered {
+                background-color: var(--color-success);
+            }
         }
     }
 }

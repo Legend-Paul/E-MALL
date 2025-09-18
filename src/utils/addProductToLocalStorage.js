@@ -15,7 +15,7 @@ export default function hanldeAddProductToCart(
             title: data.title,
             price: data.price,
             location: location,
-            deliverydDate: generateDate(4),
+            deliveryDate: generateDate(),
         },
     };
     if (products.length < 1) products.push(newProduct);

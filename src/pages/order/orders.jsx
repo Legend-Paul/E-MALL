@@ -1,5 +1,6 @@
 import { useLoaderData, Link } from "react-router-dom";
 import styles from "./order.module.css";
+import generateDate from "../../utils/generteDate";
 
 export async function Loader() {
     const response = await fetch(`https://fakestoreapi.com/products`);
@@ -12,7 +13,9 @@ export default function Orders() {
     const limit = Math.floor((Math.random() * data.length) / 1.25);
     const articleData = data.filter((data, i) => i < limit + 5 && i > limit);
     const products = JSON.parse(localStorage.getItem("orders-products"));
-    console.log(products);
+    const todayDate = new Date(generateDate());
+
+    // localStorage.removeItem("orders-products");
     return (
         <section>
             <div className={styles["products-container"]}>
@@ -28,8 +31,25 @@ export default function Orders() {
                             <div className={styles["description"]}>
                                 <h4>{product.value.title}</h4>
                                 <p>Id {product.id}</p>
-                                <p>PEDDING</p>
-                                <p>Delivery: Now</p>
+                                <p
+                                    className={
+                                        styles[
+                                            `${
+                                                todayDate <=
+                                                new Date(
+                                                    product.value.deliveryDate
+                                                )
+                                                    ? "delivered"
+                                                    : "pedding"
+                                            }`
+                                        ]
+                                    }
+                                >
+                                    {todayDate <= product.value.deliveryDate
+                                        ? "DELIVERED"
+                                        : "PEDDING"}
+                                </p>
+                                <p>Delivery: {product.value.deliveryDate}</p>
                             </div>
                         </div>
                     );

@@ -3,6 +3,7 @@ import styles from "./checkout.module.css";
 import { calculateTotalPrice } from "../../utils/addProductToLocalStorage";
 import Button from "../../components/button";
 import { useState } from "react";
+
 export default function CheckOut() {
     const [deliverOption, setDeliveryOPtion] = useState("station");
     const navigate = useNavigate();
@@ -16,6 +17,7 @@ export default function CheckOut() {
         0
     );
     const totalPrice = calculateTotalPrice(products);
+
     function handleChangeDeliveryOption(option) {
         setDeliveryOPtion(option);
     }
@@ -31,8 +33,8 @@ export default function CheckOut() {
             "orders-products",
             JSON.stringify([...ordersProduct, ...products])
         );
-        localStorage.removeItem("cart-products");
         navigate("/orders");
+        localStorage.removeItem("cart-products");
     }
     return (
         <section>
@@ -80,6 +82,10 @@ export default function CheckOut() {
                                             >
                                                 <h4>{data.value.title}</h4>
                                                 <p>Ksh {data.value.price}</p>
+                                                <p>
+                                                    Delivery{": "}
+                                                    {data.value.deliveryDate}
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -146,12 +152,13 @@ export default function CheckOut() {
                                         <p>{calculateTotalOrderAmount()}</p>
                                     </div>
                                 </div>
-
-                                <Button
-                                    label="Order Now"
-                                    color="secondary"
-                                    handleClick={handleNavigateToOrdersPage}
-                                />
+                                <div className={styles["btn-cont"]}>
+                                    <Button
+                                        label="Order Now"
+                                        color="secondary"
+                                        handleClick={handleNavigateToOrdersPage}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
