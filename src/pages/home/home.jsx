@@ -2,11 +2,12 @@ import indexStyles from "../../index.module.css";
 import styles from "./home.module.css";
 import Button from "../../components/button";
 import { DynamicInput } from "../../components/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLoaderData, useSearchParams } from "react-router-dom";
 import getFilterPriceRange from "../../utils/filterPrice";
 import getSortProductOption from "../../utils/sortProduct";
 import hanldeAddProductToCart from "../../utils/addProductToLocalStorage";
+import Notification from "../../components/notification/notification";
 
 export async function Loader() {
     const response = await fetch("https://fakestoreapi.com/products");
@@ -21,7 +22,7 @@ export default function Home() {
     const minPriceFilter = searchParams.get("min-price");
     const sortOption = searchParams.get("sort");
     const sortOrderOption = searchParams.get("order");
-
+    const [displayNotification, setDisplayNotification] = useState(false);
     const data = useLoaderData();
     const [isFilterOptionOpen, setIsFilterOptionOpen] = useState(false);
     const [activeChip, setActiveChip] = useState(
@@ -42,6 +43,11 @@ export default function Home() {
         "Jewelery",
     ];
     const sortOptions = ["Name", "Price"];
+
+    useEffect(() => {
+        const timer = setTimeout(() => setDisplayNotification(false), 2000);
+        return () => clearTimeout(timer);
+    }, [displayNotification]);
 
     let filteredData = filterOption
         ? data.filter(
@@ -98,8 +104,17 @@ export default function Home() {
         });
     }
 
+    function handleAddtoCartBtnClick(data) {
+        hanldeAddProductToCart(data);
+        setDisplayNotification(true);
+    }
+
     return (
         <section className={`${indexStyles["page"]} ${styles["home-page"]}`}>
+            <Notification
+                title={"Product added Successfully"}
+                state={displayNotification}
+            />
             <div className={styles["user-options-cont"]}>
                 <div
                     className={`${styles["achordion"]} ${
@@ -310,7 +325,7 @@ export default function Home() {
                                     label="Add to cart"
                                     color="secondary"
                                     handleClick={() =>
-                                        hanldeAddProductToCart(data)
+                                        handleAddtoCartBtnClick(data)
                                     }
                                 />
                             </div>

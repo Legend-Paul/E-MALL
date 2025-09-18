@@ -1,0 +1,25 @@
+.add-to-cart-confirmation {
+    z-index: 10000;
+    background-color: var(--color-success);
+    color: var(--color-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+    margin: auto;
+    top: 5.75rem;
+    left: 0;
+    gap: 2rem;
+    opacity: 0;
+    transition: var(--transition-medium);
+    i {
+        font-size: 2rem;
+    }
+}
+.error {
+    background-color: var(--color-error);
+}
+.display-confirmation {
+    opacity: 1;
+}

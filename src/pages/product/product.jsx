@@ -2,7 +2,8 @@ import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/button";
 import styles from "./product.module.css";
 import hanldeAddProductToCart from "../../utils/addProductToLocalStorage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Notification from "../../components/notification/notification";
 
 export async function Loader() {
     const response = await fetch(`https://fakestoreapi.com/products`);
@@ -18,6 +19,8 @@ function CheckPrevProductAmount(id, products) {
 export default function Product() {
     const dataArray = useLoaderData();
     const { id } = useParams();
+    const [displayNotification, setDisplayNotification] = useState(false);
+
     const products = JSON.parse(localStorage.getItem("cart-products"));
     const data = dataArray[id - 1];
     const navigate = useNavigate();
@@ -31,6 +34,10 @@ export default function Product() {
     const similarData = dataArray.filter(
         (d) => d?.category === data?.category && d?.id !== data?.id
     );
+    useEffect(() => {
+        const timer = setTimeout(() => setDisplayNotification(false), 2000);
+        return () => clearTimeout(timer);
+    }, [displayNotification]);
 
     function handleAddAmount() {
         setProductAmount((amount) => amount + 1);
@@ -45,6 +52,7 @@ export default function Product() {
     function handleAddToCart() {
         if (productAmount === 0) setProductAmount(1);
         hanldeAddProductToCart(data, productAmount, location);
+        setDisplayNotification(true);
     }
 
     function handeLocationChange(e) {
@@ -56,6 +64,10 @@ export default function Product() {
 
     return (
         <section className={styles["product-section"]}>
+            <Notification
+                title={"Product added Succesfully"}
+                state={displayNotification}
+            />
             <button
                 onClick={handleNavigateToHomePage}
                 className={styles["move-back-btn"]}

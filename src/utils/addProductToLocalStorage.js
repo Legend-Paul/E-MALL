@@ -32,7 +32,6 @@ export default function hanldeAddProductToCart(
         index > -1
             ? products.splice(index, 1, product)
             : products.push(product);
-        console.log(product);
     }
 
     localStorage.setItem("cart-products", JSON.stringify(products));
