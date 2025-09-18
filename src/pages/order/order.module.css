@@ -1,6 +1,9 @@
 .products-container {
     display: grid;
     gap: 2rem;
+    h2 {
+        font-size: 1.5rem;
+    }
     .product {
         display: flex;
         gap: 2rem;
@@ -35,6 +38,16 @@
             }
         }
     }
+}
+.no-product-container {
+    display: grid;
+    place-items: center;
+    height: 15rem;
+    max-width: 1000px;
+    margin: auto;
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-md);
 }
 article {
     .images {

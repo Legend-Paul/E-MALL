@@ -34,7 +34,7 @@ export default function CheckOut() {
             JSON.stringify([...ordersProduct, ...products])
         );
         navigate("/orders");
-        localStorage.removeItem("cart-products");
+        setTimeout(() => localStorage.removeItem("cart-products"), 1000);
     }
     return (
         <section>
