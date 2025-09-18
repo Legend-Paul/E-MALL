@@ -7,9 +7,10 @@ import {
 import Button from "../../components/button";
 import styles from "./cart.module.css";
 import { handleDeleteProductFromCart } from "../../utils/addProductToLocalStorage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import hanldeAddProductToCart from "../../utils/addProductToLocalStorage";
 import { calculateTotalPrice } from "../../utils/addProductToLocalStorage";
+import Notification from "../../components/notification/notification";
 
 export async function Loader() {
     const response = await fetch(`https://fakestoreapi.com/products`);
@@ -22,6 +23,7 @@ export default function Cart() {
     const navigate = useNavigate();
     const location = useLocation();
     const [click, setclick] = useState(false);
+    const [displayNotification, setDisplayNotification] = useState(false);
     const homeSearchParams = location.state?.searchParams || "";
     const limit = Math.floor((Math.random() * data.length) / 1.25);
     const articleData = data.filter((data, i) => i < limit + 5 && i > limit);
@@ -34,6 +36,10 @@ export default function Cart() {
         (acc, curr) => acc + curr?.value?.amount,
         0
     );
+    useEffect(() => {
+        const timer = setTimeout(() => setDisplayNotification(false), 2000);
+        return () => clearTimeout(timer);
+    }, [displayNotification]);
 
     function handleNavigateToHomePage() {
         navigate(`/${homeSearchParams}`);
@@ -42,19 +48,18 @@ export default function Cart() {
     function handleDeleteProduct(data) {
         setclick(!click);
         handleDeleteProductFromCart(data);
+        setDisplayNotification(true);
     }
 
     function handleAddAmount(id, amount) {
         hanldeAddProductToCart(data[id - 1], amount + 1);
         setTotalAmount(calculateTotalPrice(products));
-        setclick(!click);
     }
     function handleSubtractAmount(id, amount) {
         amount - 1 < 1
             ? handleDeleteProductFromCart(data)
             : hanldeAddProductToCart(data[id - 1], amount - 1);
         setTotalAmount(calculateTotalPrice(products));
-        setclick(!click);
     }
     function handleNavigateToCheckout() {
         navigate("/cart/checkout");
@@ -62,6 +67,11 @@ export default function Cart() {
 
     return (
         <section>
+            <Notification
+                title={"Product deleted successfully"}
+                type={"error"}
+                state={displayNotification}
+            />
             {products ? (
                 <div className={styles["products-content"]}>
                     <div className={styles["products-container"]}>
