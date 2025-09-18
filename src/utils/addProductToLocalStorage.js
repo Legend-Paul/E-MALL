@@ -1,4 +1,5 @@
 import { produce } from "immer";
+import generateDate from "./generteDate";
 
 export default function hanldeAddProductToCart(
     data,
@@ -14,6 +15,7 @@ export default function hanldeAddProductToCart(
             title: data.title,
             price: data.price,
             location: location,
+            deliverydDate: generateDate(4),
         },
     };
     if (products.length < 1) products.push(newProduct);
@@ -30,6 +32,7 @@ export default function hanldeAddProductToCart(
         index > -1
             ? products.splice(index, 1, product)
             : products.push(product);
+        console.log(product);
     }
 
     localStorage.setItem("cart-products", JSON.stringify(products));

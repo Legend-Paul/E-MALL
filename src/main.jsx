@@ -23,7 +23,7 @@ import ForgotPassword, {
 import Product, { Loader as productLoader } from "./pages/product/product";
 import Cart, { Loader as cartLoader } from "./pages/cart/cart";
 import CheckOut from "./pages/checkout/checkout";
-import Orders from "./pages/order/orders";
+import Orders, { Loader as ordersLoader } from "./pages/order/orders";
 
 const routes = createBrowserRouter(
     createRoutesFromElements(
@@ -63,7 +63,11 @@ const routes = createBrowserRouter(
                 </Route>
                 <Route path="/cart" element={<Cart />} loader={cartLoader} />
                 <Route path="/cart/checkout" element={<CheckOut />} />
-                <Route path="/orders" element={<Orders />} />
+                <Route
+                    path="/orders"
+                    element={<Orders />}
+                    loader={ordersLoader}
+                />
             </Route>
         </>
     )
