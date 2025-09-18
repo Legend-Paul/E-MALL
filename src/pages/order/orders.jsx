@@ -25,7 +25,6 @@ export default function Orders() {
         navigate("/");
     }
 
-    // localStorage.clear();
     return (
         <section>
             {signedUser ? (

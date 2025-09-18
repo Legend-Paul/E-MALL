@@ -155,18 +155,7 @@ export default function Header() {
                                         <p>Orders</p>
                                     </NavLink>
                                 </li>
-                                <li className={styles["burger-md"]}>
-                                    <NavLink
-                                        to="/liked"
-                                        className={({ isActive }) =>
-                                            isActive ? styles["active"] : ""
-                                        }
-                                    >
-                                        {" "}
-                                        <i className="bi bi-heart-fill"></i>
-                                        <p>Liked</p>
-                                    </NavLink>
-                                </li>
+
                                 <li className={styles["burger-xsm"]}>
                                     <NavLink
                                         to="/account"
@@ -289,20 +278,6 @@ export default function Header() {
                                 >
                                     <i className="bi bi-person-circle me-2"></i>
                                     <p>Account</p>
-                                </NavLink>
-                            </li>
-                            <li className={styles["burger-md"]}>
-                                <NavLink
-                                    to="/liked"
-                                    className={({ isActive }) =>
-                                        isActive ? styles["active"] : ""
-                                    }
-                                    state={{
-                                        searchParams: `?${searchParams.toString()}`,
-                                    }}
-                                >
-                                    <i className="bi bi-heart-fill"></i>
-                                    <p>Liked</p>
                                 </NavLink>
                             </li>
                         </ul>

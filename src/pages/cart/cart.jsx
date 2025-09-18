@@ -59,9 +59,6 @@ export default function Cart() {
     function handleNavigateToCheckout() {
         navigate("/cart/checkout");
     }
-    console.log(products);
-
-    // localStorage.removeItem("cart-products");
 
     return (
         <section>

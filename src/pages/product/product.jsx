@@ -21,7 +21,6 @@ export default function Product() {
     const products = JSON.parse(localStorage.getItem("cart-products"));
     const data = dataArray[id - 1];
     const navigate = useNavigate();
-    // localStorage.removeItem("cart-products");
     const prevProduct = CheckPrevProductAmount(id, products);
     const [productAmount, setProductAmount] = useState(
         prevProduct?.value?.amount || 0
