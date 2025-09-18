@@ -85,7 +85,7 @@ export default function Orders() {
                     </div>
                 )
             ) : (
-                <Navigate to="/" />
+                <Navigate to="/account" />
             )}
             <article>
                 <h4>Product you may like</h4>
