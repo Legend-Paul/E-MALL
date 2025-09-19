@@ -7,6 +7,7 @@ import {
     Link,
     useActionData,
     useLoaderData,
+    useNavigation,
     useSearchParams,
 } from "react-router-dom";
 import getFilterPriceRange from "../../utils/filterPrice";
@@ -22,6 +23,7 @@ export async function Loader() {
 
 export default function Home() {
     const searchValue = useActionData();
+    const navigation = useNavigation();
     const [searchParams, setSearchParams] = useSearchParams();
     const filterOption = searchParams.get("filter-by");
     const maxPriceFilter = searchParams.get("max-price");
@@ -41,7 +43,6 @@ export default function Home() {
     const [activeSortingOrder, setActiveSortingOrder] = useState(
         sortOrderOption ? sortOrderOption : null
     );
-
     const filterOptions = [
         "All",
         "Men's clothing",
@@ -71,27 +72,35 @@ export default function Home() {
         sortOption || sortOrderOption
             ? getSortProductOption(filteredData, sortOption, sortOrderOption)
             : filteredData;
-    filteredData = searchFilter
+
+    if (navigation.state === "submitting")
+        console.log(navigation.state === "submitting");
+
+    let searchInput = searchValue?.search || searchFilter;
+
+    filteredData = searchInput
         ? filteredData.filter((data) => {
               {
-                  return data.title.includes(searchFilter);
+                  return data.title.includes(searchInput);
               }
           })
         : filteredData;
+
+    // useEffect(() => {
+    //     if (filteredData.length < 1 && searchValue?.notUsed)
+    //         setDisplayNotification(true);
+    // }, [
+    //     setDisplayNotification,
+    //     filteredData,
+    //     searchValue?.notUsed,
+    //     searchInput,
+    // ]);
     useEffect(() => {
         if (searchValue?.notUsed) {
             handleFilterSetting(null, "search", searchValue.search);
             searchValue.notUsed = false;
         }
     });
-
-    // filteredData = searchValue
-    //     ? filteredDataBySearchValue.length > 0
-    //         ? filteredDataBySearchValue
-    //         : filteredData
-    //     : filteredData;
-    //
-    //
 
     function handleFilterSetting(filterName, type, value) {
         type === "filter-by" ? setActiveChip(filterName) : null;
