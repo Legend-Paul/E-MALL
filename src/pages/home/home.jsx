@@ -3,7 +3,12 @@ import styles from "./home.module.css";
 import Button from "../../components/button";
 import { DynamicInput } from "../../components/input";
 import { useEffect, useState } from "react";
-import { Link, useLoaderData, useSearchParams } from "react-router-dom";
+import {
+    Link,
+    useActionData,
+    useLoaderData,
+    useSearchParams,
+} from "react-router-dom";
 import getFilterPriceRange from "../../utils/filterPrice";
 import getSortProductOption from "../../utils/sortProduct";
 import hanldeAddProductToCart from "../../utils/addProductToLocalStorage";
@@ -16,10 +21,12 @@ export async function Loader() {
 }
 
 export default function Home() {
+    const searchValue = useActionData();
     const [searchParams, setSearchParams] = useSearchParams();
     const filterOption = searchParams.get("filter-by");
     const maxPriceFilter = searchParams.get("max-price");
     const minPriceFilter = searchParams.get("min-price");
+    const searchFilter = searchParams.get("search");
     const sortOption = searchParams.get("sort");
     const sortOrderOption = searchParams.get("order");
     const [displayNotification, setDisplayNotification] = useState(false);
@@ -64,16 +71,35 @@ export default function Home() {
         sortOption || sortOrderOption
             ? getSortProductOption(filteredData, sortOption, sortOrderOption)
             : filteredData;
+    filteredData = searchFilter
+        ? filteredData.filter((data) => {
+              {
+                  return data.title.includes(searchFilter);
+              }
+          })
+        : filteredData;
+    useEffect(() => {
+        if (searchValue?.notUsed) {
+            handleFilterSetting(null, "search", searchValue.search);
+            searchValue.notUsed = false;
+        }
+    });
+
+    // filteredData = searchValue
+    //     ? filteredDataBySearchValue.length > 0
+    //         ? filteredDataBySearchValue
+    //         : filteredData
+    //     : filteredData;
+    //
+    //
+
     function handleFilterSetting(filterName, type, value) {
         type === "filter-by" ? setActiveChip(filterName) : null;
         setSearchParams((prevParam) => {
             if (!value) {
                 prevParam.delete(type);
             } else {
-                prevParam.set(
-                    type,
-                    Number.isFinite(value) ? value : value.toLocaleLowerCase()
-                );
+                prevParam.set(type, Number.isFinite(value) ? value : value);
             }
             return prevParam;
         });
@@ -112,7 +138,7 @@ export default function Home() {
     return (
         <section className={`${indexStyles["page"]} ${styles["home-page"]}`}>
             <Notification
-                title={"Product added Successfully"}
+                title={`${"Product added Successfully"}`}
                 state={displayNotification}
             />
             <div className={styles["user-options-cont"]}>

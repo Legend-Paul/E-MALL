@@ -15,8 +15,7 @@ import Footer from "./footer";
 
 export async function Action({ request }) {
     const data = await request.formData();
-    console.log(data.get("search"));
-    return null;
+    return { search: data.get("search"), notUsed: true };
 }
 function calculateProductsAmount(products) {
     return products
@@ -87,6 +86,7 @@ export default function Header() {
                                 type={"search"}
                                 name={"search"}
                                 placehoder={"search item here"}
+                                required={false}
                             />
                             <Button
                                 label={<i className="bi bi-search"></i>}
